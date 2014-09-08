@@ -4,7 +4,7 @@ _ = require 'lodash'
 
 # Configuration
 api = express()
-api.set 'title', 'Kewl'
+api.set 'title', 'SolrPress'
 api.use express.bodyParser()
 api.use express.cookieParser()
 api.use express.cookieSession

@@ -1,6 +1,6 @@
 'use strict'
 describe 'filters', ->
-  beforeEach module('kewl')
+  beforeEach module('solrpress')
 
   describe 'capitalize', ->
     it 'should capitalize a string', inject((capitalizeFilter) ->

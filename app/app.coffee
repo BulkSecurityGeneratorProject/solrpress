@@ -1,6 +1,6 @@
 'use strict'
 
-app = angular.module 'kewl', ['ng', 'ngRoute', 'ui.bootstrap', 'hljs', 'kewl.todo', 'kewl.authentication']
+app = angular.module 'solrpress', ['ng', 'ngRoute', 'ui.bootstrap', 'hljs', 'solrpress.todo', 'solrpress.authentication']
 
 app.config [
   '$routeProvider', '$locationProvider', '$httpProvider', 'hljsServiceProvider'

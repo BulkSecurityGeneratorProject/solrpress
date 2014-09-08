@@ -1,6 +1,6 @@
 'use strict'
 
-todo = angular.module 'kewl.todo', ['ng', 'ngRoute', 'ui.bootstrap', 'ngResource']
+todo = angular.module 'solrpress.todo', ['ng', 'ngRoute', 'ui.bootstrap', 'ngResource']
 
 todo.config [
   '$routeProvider'

@@ -1,5 +1,5 @@
 {
-  "name": "Kewl",
+  "name": "SolrPress",
   "version": "0.0.0",
   "main": "public/app.js",
   "private": true,
@@ -11,6 +11,7 @@
     "tests"
   ],
   "dependencies": {
+    "jquery": "*",
     "bootstrap": "*",
     "font-awesome": "*",
     "angular": "*",

@@ -1,6 +1,6 @@
 'use strict'
 
-auth = angular.module 'kewl.authentication', ['ng', 'ngRoute', 'ui.bootstrap']
+auth = angular.module 'solrpress.authentication', ['ng', 'ngRoute', 'ui.bootstrap']
 
 auth.config [
   '$routeProvider'

@@ -1,4 +1,4 @@
-# Kewl brunch skeleton
+# SolrPress brunch skeleton
 :heart: Result of the infinite love of AngularJS and APIs
 
 ----------------
@@ -22,7 +22,7 @@
 
 ## Installation
 
-    brunch new gh:davinov/kewl
+    brunch new gh:davinov/solrpress
 
 ## Development server
 
