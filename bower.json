@@ -1,38 +1,27 @@
 {
-  "name": "SolrPress",
-  "version": "0.0.0",
-  "main": "public/app.js",
+  "name": "solrPress",
+  "version": "0.0.1",
   "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
   "dependencies": {
-    "jquery": "*",
-    "bootstrap": "*",
-    "font-awesome": "*",
-    "angular": "*",
-    "angular-route": "*",
-    "angular-bootstrap": "*",
-    "bootswatch": "*",
-    "angular-highlightjs": "*",
-    "angular-resource": "*"
+    "bootstrap-sass-official": "3.2.0+2",
+    "modernizr": "2.7.1",
+    "jquery": "2.1.1",
+    "angular": "1.2.22",
+    "json3": "3.3.2",
+    "angular-route": "1.2.22",
+    "angular-resource": "1.2.22",
+    "angular-cookies": "1.2.22",
+    "angular-sanitize": "1.2.22",
+    "angular-translate": "2.2.0",
+    "angular-translate-storage-cookie": "2.2.0",
+    "angular-translate-loader-static-files": "2.2.0",
+    "angular-dynamic-locale": "0.1.1",
+    "angular-i18n": "1.2.22",
+    "swagger-ui": "2.0.18",
+    "bootstrap-material-design": "~0.1.0"
   },
   "devDependencies": {
-    "angular-mocks": "*"
-  },
-  "overrides": {
-    "font-awesome": {
-      "main": "./font-awesome.css"
-    },
-    "jquery": {
-      "main": "./dist/jquery.js"
-    },
-    "bootswatch": {
-      "main": "./lumen/bootstrap.css"
-    }
+    "angular-mocks": "1.2.22",
+    "angular-scenario": "1.2.22"
   }
 }

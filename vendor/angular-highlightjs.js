@@ -1,1 +1,0 @@
-../bower_components/angular-highlightjs/angular-highlightjs.js

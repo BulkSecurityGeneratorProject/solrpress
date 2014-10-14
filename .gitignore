@@ -1,36 +1,15 @@
-# Numerous always-ignore extensions
-*.diff
-*.err
-*.orig
-*.log
-*.rej
-*.swo
-*.swp
-*.vi
-*~
-*.sass-cache
-
-# OS or Editor folders
-.DS_Store
-.cache
+target
+node
+node_modules
+.idea
+*.iml
+.classpath
 .project
 .settings
-.tmproj
-.idea
-nbproject
-Thumbs.db
-
-# NPM + Bower
-node_modules/
-bower_components/
-
-# Brunch
-public/
-tmp/
-
-# File pre-compiled by static jade
-app/assets/partials/
-app/assets/index.html
-
-# Coveralls
-coverage/
+.tmp
+.merge_file*
+.sass-cache
+.DS_Store
+src/main/webapp/dist
+.gradle
+build

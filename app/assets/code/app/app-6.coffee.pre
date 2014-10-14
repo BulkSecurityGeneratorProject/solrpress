@@ -1,2 +1,0 @@
-app = angular.module 'solrpress', ['ng', 'ngRoute', 'ui.bootstrap', 'hljs', 'solrpress.todo', 'solrpress.authentication']
-[...]
