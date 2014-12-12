@@ -2,7 +2,7 @@
 
 describe('Services Tests ', function () {
 
-    beforeEach(module('solrPressApp'));
+    beforeEach(module('solrpressApp'));
 
     describe('AuthenticationSharedService', function () {
         var serviceTested,
@@ -29,6 +29,9 @@ describe('Services Tests ', function () {
             var returnData = { result: 'ok' };
             //expectGET to make sure this is called once.
             httpBackend.expectGET('app/logout').respond(returnData);
+            // WebSocket tries to authenticate after logout
+            httpBackend.expectGET('protected/authentication_check.gif').respond(401, '');
+            httpBackend.expectGET('views/main.html').respond(401, '');
 
             //Set spy
             spyOn(authServiceSpied, 'loginCancelled');

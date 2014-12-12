@@ -1,16 +1,21 @@
 {
     "global": {
-        "title": "solr-press",
+        "title": "SolrPress",
         "browsehappy": "Sie benutzen einen <strong>veralteten</strong> Browser. Bitte <a href=\"http://browsehappy.com/?locale=de/\">aktualisieren Sie Ihren Browser</a>, um die Benutzerfreundlichkeit zu erhöhen.",
         "menu": {
             "home": "Startseite",
+            "entities": {
+                "main": "Entitäten"
+            },
             "account": {
                 "main": "Zugang",
                 "settings": "Einstellungen",
                 "password": "Passwort",
                 "sessions": "Sitzungen",
-                "tracker": "User tracker",
+                "tracker": "Benutzer Aktivitäten",
                 "metrics": "Metriken",
+                "health": "Status",
+                "configuration": "Konfiguration",
                 "logs": "Protokoll",
                 "audits": "Audits",
                 "login": "Anmelden",
@@ -22,8 +27,8 @@
             "language": "Sprache"
         },
         "form": {
-            "username": "Name",
-            "username.placeholder": "Ihr Name",
+            "username": "Benutzername",
+            "username.placeholder": "Ihr Benutzername",
             "newpassword": "Neues Passwort",
             "newpassword.placeholder": "Neues Passwort",
             "confirmpassword": "Neues Passwort bestätigen",
@@ -80,7 +85,7 @@
         "title": "Aktivierung",
         "messages": {
             "success": "<strong>Ihr Benutzer wurde aktiviert.</strong> Bitte <a href=\"#/login\">anmelden</a>.",
-            "error": "<strong>Ihr Benutzer konnte nicht aktiviert werden.</strong> Bitte benutzen Sie die Registrierungsmaske, um sich zu einzutragen."
+            "error": "<strong>Ihr Benutzer konnte nicht aktiviert werden.</strong> Bitte benutzen Sie die Registrierungsmaske, um sich einzutragen."
         }
     },
     "register": {
@@ -91,15 +96,17 @@
         "messages": {
             "validate": {
                 "login": {
-                    "required": "Ihre login wird benötigt.",
-                    "minlength": "Ihr login muss mindestens 1 Zeichen lang sein",
-                    "maxlength": "Ihr login darf nicht länger als 50 Zeichen sein"
+                    "required": "Ihr Benutzername wird benötigt.",
+                    "minlength": "Ihr Benutzername muss mindestens 1 Zeichen lang sein",
+                    "maxlength": "Ihr Benutzername darf nicht länger als 50 Zeichen sein",
+                    "pattern": "Your login can only contain lower-case letters and digits"
                 }
             },
-            "success": "<strong>Registrierung gespeichert!</strong> Bitte überprüfen Sie ihre E-Mail wegen der Bestätigung.",
+            "success": "<strong>Registrierung gespeichert!</strong> Bitte überprüfen Sie ihre E-Mails für die Bestätigung.",
             "error": {
-                "fail": "<strong>Registrierung fehlgeschlagen!</strong> Bitte versuchen Sie es später nocheinmal.",
-                "userexists": "<strong>Loginname bereits vergeben!</strong> Bitte wählen Sie einen anderen aus."
+                "fail": "<strong>Registrierung fehlgeschlagen!</strong> Bitte versuchen Sie es später nochmal.",
+                "userexists": "<strong>Loginname bereits vergeben!</strong> Bitte wählen Sie einen anderen aus.",
+                "emailexists": "<strong>E-mail wird bereits verwendet!</strong> Bitte wählen Sie eine andere aus."
             }
         }
     },
@@ -127,7 +134,10 @@
             "button": "Speichern"
         },
         "messages": {
-            "error": "<strong>Es ist ein Fehler aufgetreten!</strong> Die Einstellungen konnten nicht gespeichert werden.",
+            "error": {
+                "fail": "<strong>Es ist ein Fehler aufgetreten!</strong> Die Einstellungen konnten nicht gespeichert werden.",
+                "emailexists": "<strong>E-mail wird bereits verwendet!</strong> Bitte wählen Sie eine andere aus."
+            },
             "success": "<strong>Einstellungen wurden gespeichert!</strong>",
             "validate": {
                 "firstname": {
@@ -156,10 +166,10 @@
     "sessions": {
         "title": "Aktive Sitzungen für [<b>{{username}}</b>]",
         "table": {
-            "ipaddress": "IP Addresse",
+            "ipaddress": "IP Adresse",
             "useragent": "User Agent",
             "date": "Datum",
-            "button": "Schliessen"
+            "button": "Schließen"
         },
         "messages": {
             "success": "<strong>Sitzung wurde geschlossen!</strong>",
@@ -168,24 +178,19 @@
 
     },
     "tracker": {
-        "title": "Real-time user activities",
+        "title": "Echtzeit Benutzer-Aktivitäten",
         "table": {
-            "userlogin": "User",
-            "ipaddress": "IP Address",
+            "userlogin": "Benutzer",
+            "ipaddress": "IP Adresse",
             "userAgent": "User agent",
-            "page": "Current page",
-            "time": "Time"
+            "page": "Aktuelle Seite",
+            "time": "Zeit"
         }
     },
     "metrics": {
         "title": "Anwendungs-Metriken",
         "refresh.button": "Aktualisieren",
-        "health": {
-            "title": "Heath checks",
-            "database": "Database: ",
-            "email": "Email: ",
-            "stacktrace": "Stacktrace"
-        },
+        "updating": "Aktualisierung...",
         "jvm": {
             "title": "JVM Metriken",
             "memory": {
@@ -260,6 +265,46 @@
             "misses": "Keine Treffer",
             "evictioncount": "Anzahl entfernter Objekte",
             "mean": "Durchschnittliche Zugriffszeit (ms)"
+        },
+        "datasource": {
+        	"usage": "Usage",
+            "title": "Datenquelle (Zeit in millisekunden)",
+            "name": "Pool-Auslastung",
+            "count": "Anzahl",
+            "mean": "Mittel",
+            "min": "Min",
+            "max": "Max",
+            "p50": "p50",
+            "p75": "p75",
+            "p95": "p95",
+            "p99": "p99"
+        }
+    },
+    "health": {
+        "title": "Gesundheit ihrer Anwendung",
+        "refresh.button": "Aktualisieren",
+        "stacktrace": "Stacktrace",
+        "indicator": {
+            "db": "Datenbank",
+            "diskSpace": "Festplattenspeicher",
+            "mail": "Email",
+            "mongo": "Mongo"
+        },
+        "table": {
+            "service": "Dienst Name",
+            "status": "Status"
+        },
+        "status": {
+            "UP": "UP",
+            "DOWN": "DOWN"
+        }
+    },
+    "configuration": {
+        "title": "Konfiguration",
+        "filter": "Filter (nach Prefix)",
+        "table": {
+            "prefix": "Prefix",
+            "properties": "Eigenschaften"
         }
     },
     "logs": {
@@ -275,8 +320,8 @@
         "title": "Audits",
         "filter": {
             "title": "Nach Datum filtern",
-            "from": "aus",
-            "to": "zu",
+            "from": "von",
+            "to": "bis",
             "button": {
                 "weeks": "Wochen",
                 "today": "heute",

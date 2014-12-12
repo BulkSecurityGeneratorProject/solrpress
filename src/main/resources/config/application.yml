@@ -6,7 +6,7 @@ security.basic.enabled: false
 endpoints.jolokia.enabled: false
 
 # security configuration (this key should be unique for your application, and kept secret)
-jhipster.security.rememberme.key: solr-press
+jhipster.security.rememberme.key: SolrPress
 
 async:
     corePoolSize: 2
@@ -17,19 +17,19 @@ spring:
     mail:
         host: localhost
         port: 25
-        user: ferdous
-        password: " f "
+        user:
+        password:
         protocol: smtp
         tls: false
         auth: false
-        from: solr-press@localhost
+        from: ferdous@localhost
 
     messageSource:
         cacheSeconds: 1
 
 swagger:
-    title: solr-press API
-    description: solr-press applications and beyond!
+    title: SolrPress API
+    description: SolrPress applications and beyond!
     termsOfServiceUrl: http://jhipster.github.io/
     contact:
     license: Apache 2.0

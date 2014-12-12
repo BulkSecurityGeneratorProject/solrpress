@@ -1,1 +1,2 @@
-LightAdmin and JHipster integration example
+README for SolrPress
+==========================

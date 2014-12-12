@@ -1,9 +1,12 @@
 {
     "global": {
-        "title": "solr-press",
+        "title": "SolrPress",
         "browsehappy": "Używasz <strong>przestarzałej</strong> przeglądarki. Proszę <a href=\"http://browsehappy.com/\">uaktualnij swoją przeglądarkę</a> aby polepszyć doświadczenie użytkownika.",
         "menu": {
             "home": "Strona domowa",
+            "entities": {
+                "main": "Entities"
+            },
             "account": {
                 "main": "Konto",
                 "settings": "Ustawienia",
@@ -11,6 +14,8 @@
                 "sessions": "Sesje",
                 "tracker": "Śledzenie użytkownika",
                 "metrics": "Metryki",
+                "health": "Health",
+                "configuration": "Configuration",
                 "logs": "Logi",
                 "audits": "Audyty",
                 "login": "Autoryzacja",
@@ -93,13 +98,15 @@
                 "login": {
                     "required": "Your login is required.",
                     "minlength": "Your login is required to be at least 1 character",
-                    "maxlength": "Your login cannot be longer than 50 characters"
+                    "maxlength": "Your login cannot be longer than 50 characters",
+                    "pattern": "Your login can only contain lower-case letters and digits"
                 }
             },
             "success": "<strong>Registration saved!</strong> Please check your email for confirmation.",
             "error": {
                 "fail": "<strong>Registration failed!</strong> Please try again later.",
-                "userexists": "<strong>Login name already registered!</strong> Please choose another one."
+                "userexists": "<strong>Login name already registered!</strong> Please choose another one.",
+                "emailexists": "<strong>E-mail is already in use!</strong> Please choose another one."
             }
         }
     },
@@ -127,7 +134,10 @@
             "button": "Zapisz"
         },
         "messages": {
-            "error": "<strong>Wystąpi błąd!</strong> Ustawienia nie zostały zapisane.",
+            "error": {
+                "fail": "<strong>Wystąpi błąd!</strong> Ustawienia nie zostały zapisane.",
+                "emailexists": "<strong>E-mail is already in use!</strong> Please choose another one."
+            },
             "success": "<strong>Ustawienia zapisane!</strong>",
             "validate": {
                 "firstname": {
@@ -179,12 +189,7 @@
     "metrics": {
         "title": "Metryki aplikacji",
         "refresh.button": "Odśwież",
-        "health": {
-            "title": "Heath checks",
-            "database": "Baza danych: ",
-            "email": "Email: ",
-            "stacktrace": "Stos wywołań"
-        },
+        "updating": "Aktualizacja...",
         "jvm": {
             "title": "Metryki JVM",
             "memory": {
@@ -259,6 +264,46 @@
             "misses": "Nie trafionych",
             "evictioncount": "Liczba wyeksmitowanych",
             "mean": "Średni czas pobierania (ms)"
+        },
+        "datasource": {
+        	"usage": "Usage",
+            "title": "DataSource statistics (time in millisecond)",
+            "name": "Pool usage",
+            "count": "Count",
+            "mean": "Mean",
+            "min": "Min",
+            "max": "Max",
+            "p50": "p50",
+            "p75": "p75",
+            "p95": "p95",
+            "p99": "p99"
+        }
+    },
+    "health": {
+        "title": "Heath checks",
+        "refresh.button": "Odśwież",
+        "stacktrace": "Stos wywołań",
+        "indicator": {
+            "db": "Baza danych",
+            "diskSpace": "Disk space",
+            "mail": "Email",
+            "mongo": "Mongo DB"
+        },
+        "table": {
+            "service": "Nazwa usługi",
+            "status": "Status"
+        },
+        "status": {
+            "UP": "DOSTĘPNE",
+            "DOWN": "NIE DZIAŁAJĄCY"
+        }
+    },
+    "configuration": {
+        "title": "Configuration",
+        "filter": "Filter (by prefix)",
+        "table": {
+            "prefix": "Prefix",
+            "properties": "Properties"
         }
     },
     "logs": {

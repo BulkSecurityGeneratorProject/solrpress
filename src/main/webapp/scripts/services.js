@@ -2,191 +2,244 @@
 
 /* Services */
 
-solrPressApp.factory('LanguageService', function ($http, $translate, LANGUAGES) {
-        return {
-            getBy: function(language) {
-                if (language == undefined) {
-                    language = $translate.storage().get('NG_TRANSLATE_LANG_KEY');
-                }
-
-                var promise =  $http.get('/i18n/' + language + '.json').then(function(response) {
-                    return LANGUAGES;
-                });
-                return promise;
+solrpressApp.factory('loadingInterceptor', function ($rootScope, $q, $cookieStore, $location) {
+    $rootScope.loading = 0;
+    return {
+        request: function (config) {
+            $rootScope.loading++;
+            config.headers = config.headers || {};
+            if ($cookieStore.get('token')) {
+                config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
             }
-        };
-    });
-
-solrPressApp.factory('Register', function ($resource) {
-        return $resource('app/rest/register', {}, {
-        });
-    });
-
-solrPressApp.factory('Activate', function ($resource) {
-        return $resource('app/rest/activate', {}, {
-            'get': { method: 'GET', params: {}, isArray: false}
-        });
-    });
-
-solrPressApp.factory('Account', function ($resource) {
-        return $resource('app/rest/account', {}, {
-        });
-    });
-
-solrPressApp.factory('Password', function ($resource) {
-        return $resource('app/rest/account/change_password', {}, {
-        });
-    });
-
-solrPressApp.factory('Sessions', function ($resource) {
-        return $resource('app/rest/account/sessions/:series', {}, {
-            'get': { method: 'GET', isArray: true}
-        });
-    });
-
-solrPressApp.factory('MetricsService',function ($resource) {
-        return $resource('metrics/metrics', {}, {
-            'get': { method: 'GET'}
-        });
-    });
-
-solrPressApp.factory('ThreadDumpService', function ($http) {
-        return {
-            dump: function() {
-                var promise = $http.get('dump').then(function(response){
-                    return response.data;
-                });
-                return promise;
-            }
-        };
-    });
-
-solrPressApp.factory('HealthCheckService', function ($rootScope, $http) {
-        return {
-            check: function() {
-                var promise = $http.get('health').then(function(response){
-                    return response.data;
-                });
-                return promise;
-            }
-        };
-    });
-
-solrPressApp.factory('LogsService', function ($resource) {
-        return $resource('app/rest/logs', {}, {
-            'findAll': { method: 'GET', isArray: true},
-            'changeLevel':  { method: 'PUT'}
-        });
-    });
-
-solrPressApp.factory('AuditsService', function ($http) {
-        return {
-            findAll: function() {
-                var promise = $http.get('app/rest/audits/all').then(function (response) {
-                    return response.data;
-                });
-                return promise;
-            },
-            findByDates: function(fromDate, toDate) {
-                var promise = $http.get('app/rest/audits/byDates', {params: {fromDate: fromDate, toDate: toDate}}).then(function (response) {
-                    return response.data;
-                });
-                return promise;
-            }
+            return config;
+        },
+        response: function (response) {
+            $rootScope.loading--;
+            return response;
+        },
+        responseError: function (response) {
+            $rootScope.loading--;
+            return $q.reject(response);
         }
-    });
+    };
+});
 
-solrPressApp.factory('Session', function () {
-        this.create = function (login, firstName, lastName, email, userRoles) {
-            this.login = login;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.email = email;
-            this.userRoles = userRoles;
-        };
-        this.invalidate = function () {
-            this.login = null;
-            this.firstName = null;
-            this.lastName = null;
-            this.email = null;
-            this.userRoles = null;
-        };
-        return this;
-    });
+solrpressApp.factory('LanguageService', function ($http, $translate, LANGUAGES) {
+    return {
+        getBy: function (language) {
+            if (language == undefined) {
+                language = $translate.storage().get('NG_TRANSLATE_LANG_KEY');
+            }
+            if (language == undefined) {
+                language = 'en';
+            }
 
-solrPressApp.factory('AuthenticationSharedService', function ($rootScope, $http, authService, Session, Account) {
-        return {
-            login: function (param) {
-                var data ="j_username=" + param.username +"&j_password=" + param.password +"&_spring_security_remember_me=" + param.rememberMe +"&submit=Login";
-                $http.post('app/authentication', data, {
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded"
-                    },
-                    ignoreAuthModule: 'ignoreAuthModule'
-                }).success(function (data, status, headers, config) {
-                    Account.get(function(data) {
+            var promise = $http.get('i18n/' + language + '.json').then(function (response) {
+                return LANGUAGES;
+            });
+            return promise;
+        }
+    };
+});
+
+solrpressApp.factory('Register', function ($resource) {
+    return $resource('app/rest/register', {}, {
+    });
+});
+
+solrpressApp.factory('Activate', function ($resource) {
+    return $resource('app/rest/activate', {}, {
+        'get': { method: 'GET', params: {}, isArray: false}
+    });
+});
+
+solrpressApp.factory('Account', function ($resource) {
+    return $resource('app/rest/account', {}, {
+    });
+});
+
+solrpressApp.factory('Password', function ($resource) {
+    return $resource('app/rest/account/change_password', {}, {
+    });
+});
+
+solrpressApp.factory('Sessions', function ($resource) {
+    return $resource('app/rest/account/sessions/:series', {}, {
+        'get': { method: 'GET', isArray: true}
+    });
+});
+
+solrpressApp.factory('MetricsService', function ($http) {
+    return {
+        get: function () {
+            var promise = $http.get('metrics/metrics').then(function (response) {
+                return response.data;
+            });
+            return promise;
+        }
+    };
+});
+
+solrpressApp.factory('ThreadDumpService', function ($http) {
+    return {
+        dump: function () {
+            var promise = $http.get('dump').then(function (response) {
+                return response.data;
+            });
+            return promise;
+        }
+    };
+});
+
+solrpressApp.factory('HealthCheckService', function ($rootScope, $http) {
+    return {
+        check: function () {
+            var promise = $http.get('health').then(function (response) {
+                return response.data;
+            });
+            return promise;
+        }
+    };
+});
+
+solrpressApp.factory('ConfigurationService', function ($rootScope, $filter, $http) {
+    return {
+        get: function () {
+            var promise = $http.get('configprops').then(function (response) {
+                var properties = [];
+                angular.forEach(response.data, function (data) {
+                    properties.push(data);
+                });
+                var orderBy = $filter('orderBy');
+                return orderBy(properties, 'prefix');
+                ;
+            });
+            return promise;
+        }
+    };
+});
+
+solrpressApp.factory('LogsService', function ($resource) {
+    return $resource('app/rest/logs', {}, {
+        'findAll': { method: 'GET', isArray: true},
+        'changeLevel': { method: 'PUT'}
+    });
+});
+
+solrpressApp.factory('AuditsService', function ($http) {
+    return {
+        findAll: function () {
+            var promise = $http.get('app/rest/audits/all').then(function (response) {
+                return response.data;
+            });
+            return promise;
+        },
+        findByDates: function (fromDate, toDate) {
+            var promise = $http.get('app/rest/audits/byDates', {params: {fromDate: fromDate, toDate: toDate}}).then(function (response) {
+                return response.data;
+            });
+            return promise;
+        }
+    }
+});
+
+solrpressApp.factory('Session', function () {
+    this.create = function (login, firstName, lastName, email, userRoles) {
+        this.login = login;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.userRoles = userRoles;
+    };
+    this.invalidate = function () {
+        this.login = null;
+        this.firstName = null;
+        this.lastName = null;
+        this.email = null;
+        this.userRoles = null;
+    };
+    return this;
+});
+
+solrpressApp.factory('AuthenticationSharedService', function ($rootScope, $http, authService, Session, Account) {
+    return {
+        login: function (param) {
+            var data = "j_username=" + encodeURIComponent(param.username) + "&j_password=" + encodeURIComponent(param.password) + "&_spring_security_remember_me=" + param.rememberMe + "&submit=Login";
+            $http.post('app/authentication', data, {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                ignoreAuthModule: 'ignoreAuthModule'
+            }).success(function (data, status, headers, config) {
+                Account.get(function (data) {
+                    Session.create(data.login, data.firstName, data.lastName, data.email, data.roles);
+                    $rootScope.account = Session;
+                    authService.loginConfirmed(data);
+                });
+            }).error(function (data, status, headers, config) {
+                $rootScope.authenticationError = true;
+                Session.invalidate();
+            });
+        },
+        valid: function (authorizedRoles) {
+
+            $http.get('protected/authentication_check.gif', {
+                ignoreAuthModule: 'ignoreAuthModule'
+            }).success(function (data, status, headers, config) {
+                if (!Session.login) {
+                    Account.get(function (data) {
                         Session.create(data.login, data.firstName, data.lastName, data.email, data.roles);
                         $rootScope.account = Session;
-                        authService.loginConfirmed(data);
+                        if (!$rootScope.isAuthorized(authorizedRoles)) {
+                            // user is not allowed
+                            $rootScope.$broadcast("event:auth-notAuthorized");
+                        } else {
+                            $rootScope.$broadcast("event:auth-loginConfirmed");
+                        }
                     });
-                }).error(function (data, status, headers, config) {
-                    $rootScope.authenticationError = true;
-                    Session.invalidate();
-                });
-            },
-            valid: function (authorizedRoles) {
-
-                $http.get('protected/authentication_check.gif', {
-                    ignoreAuthModule: 'ignoreAuthModule'
-                }).success(function (data, status, headers, config) {
-                    if (!Session.login) {
-                        Account.get(function(data) {
-                            Session.create(data.login, data.firstName, data.lastName, data.email, data.roles);
-                            $rootScope.account = Session;
-
-                            if (!$rootScope.isAuthorized(authorizedRoles)) {
-                                event.preventDefault();
-                                // user is not allowed
-                                $rootScope.$broadcast("event:auth-notAuthorized");
-                            }
-
-                            $rootScope.authenticated = true;
-                        });
+                } else {
+                    if (!$rootScope.isAuthorized(authorizedRoles)) {
+                        // user is not allowed
+                        $rootScope.$broadcast("event:auth-notAuthorized");
+                    } else {
+                        $rootScope.$broadcast("event:auth-loginConfirmed");
                     }
-                    $rootScope.authenticated = !!Session.login;
-                }).error(function (data, status, headers, config) {
-                    $rootScope.authenticated = false;
-                });
-            },
-            isAuthorized: function (authorizedRoles) {
-                if (!angular.isArray(authorizedRoles)) {
-                    if (authorizedRoles == '*') {
-                        return true;
-                    }
-
-                    authorizedRoles = [authorizedRoles];
+                }
+            }).error(function (data, status, headers, config) {
+                if (!$rootScope.isAuthorized(authorizedRoles)) {
+                    $rootScope.$broadcast('event:auth-loginRequired', data);
+                }
+            });
+        },
+        isAuthorized: function (authorizedRoles) {
+            if (!angular.isArray(authorizedRoles)) {
+                if (authorizedRoles == '*') {
+                    return true;
                 }
 
-                var isAuthorized = false;
-                angular.forEach(authorizedRoles, function(authorizedRole) {
-                    var authorized = (!!Session.login &&
-                        Session.userRoles.indexOf(authorizedRole) !== -1);
-
-                    if (authorized || authorizedRole == '*') {
-                        isAuthorized = true;
-                    }
-                });
-
-                return isAuthorized;
-            },
-            logout: function () {
-                $rootScope.authenticationError = false;
-                $rootScope.authenticated = false;
-                $rootScope.account = null;
-
-                $http.get('app/logout');
-                Session.invalidate();
-                authService.loginCancelled();
+                authorizedRoles = [authorizedRoles];
             }
-        };
-    });
+
+            var isAuthorized = false;
+            angular.forEach(authorizedRoles, function (authorizedRole) {
+                var authorized = (!!Session.login &&
+                    Session.userRoles.indexOf(authorizedRole) !== -1);
+
+                if (authorized || authorizedRole == '*') {
+                    isAuthorized = true;
+                }
+            });
+
+            return isAuthorized;
+        },
+        logout: function () {
+            $rootScope.authenticationError = false;
+            $rootScope.authenticated = false;
+            $rootScope.account = null;
+
+            $http.get('app/logout');
+            Session.invalidate();
+            authService.loginCancelled();
+        }
+    };
+});

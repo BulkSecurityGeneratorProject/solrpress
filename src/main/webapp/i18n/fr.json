@@ -1,9 +1,12 @@
 {
     "global": {
-        "title": "solr-press",
+        "title": "SolrPress",
         "browsehappy": "Vous utilisez un <strong>ancien</strong> navigateur. Veuillez <a href=\"http://browsehappy.com/?locale=fr\">mettre à jour votre navigateur</a> pour une meilleure expérience.",
         "menu": {
             "home": "Accueil",
+            "entities": {
+                "main": "Entities"
+            },
             "account": {
                 "main": "Compte",
                 "settings": "Profil",
@@ -11,6 +14,8 @@
                 "sessions": "Sessions",
                 "tracker": "Suivi des utilisateurs",
                 "metrics": "Métriques",
+                "health": "Diagnostics",
+                "configuration": "Configuration",
                 "logs": "Logs",
                 "audits": "Audits",
                 "login": "S'authentifier",
@@ -93,13 +98,15 @@
                 "login": {
                     "required": "Votre nom d'utilisateur est obligatoire.",
                     "minlength": "Votre nom d'utilisateur doit contenir plus d'un caractère",
-                    "maxlength": "Votre nom d'utilisateur ne peut pas contenir plus de 50 caractères"
+                    "maxlength": "Votre nom d'utilisateur ne peut pas contenir plus de 50 caractères",
+                    "pattern": "Votre nom d'utilisateur ne peut contenir que des lettres minuscules ou des nombres"
                 }
             },
             "success": "<strong>Compte enregistré !</strong> Merci de vérifier votre e-mail de confirmation.",
             "error": {
                 "fail": "<strong>Compte non créé!</strong> Merci d'essayer à nouveau plus tard.",
-                "userexists": "<strong>Ce compte utilisateur existe déjà !</strong> Veuillez en choisir un autre."
+                "userexists": "<strong>Ce compte utilisateur existe déjà !</strong> Veuillez en choisir un autre.",
+                "emailexists": "<strong>Cet E-mail est déjà utilisé!</strong> Veuillez en choisir un autre."
             }
         }
     },
@@ -127,7 +134,10 @@
             "button": "Sauvegarder"
         },
         "messages": {
-            "error": "<strong>Une erreur est survenue!</strong> Votre profil ne peut pas être sauvegardé.",
+            "error": {
+                "fail": "<strong>Une erreur est survenue!</strong> Votre profil n'a pas été sauvegardé.",
+                "emailexists": "<strong>Cet E-mail est déjà utilisé!</strong> Veuillez en choisir un autre."
+            },
             "success": "<strong>Votre profil a été sauvegardé!</strong>",
             "validate": {
                 "firstname": {
@@ -179,12 +189,7 @@
     "metrics": {
         "title": "Métriques de l'application",
         "refresh.button": "Rafraichir",
-        "health": {
-            "title": "Diagnostics",
-            "database": "Base de données: ",
-            "email": "Email: ",
-            "stacktrace": "Stacktrace"
-        },
+        "updating": "Mise à jour...",
         "jvm": {
             "title": "Métriques de la JVM",
             "memory": {
@@ -259,6 +264,46 @@
             "misses": "Données non existantes",
             "evictioncount": "Nombre de suppressions",
             "mean": "Temps de réponse (ms)"
+        },
+        "datasource": {
+        	"usage": "Usage",
+            "title": "Statistiques du pool de connexions (Temps en milliseconde)",
+            "name": "Utilisation du pool",
+            "count": "Total",
+            "mean": "Médian",
+            "min": "Min",
+            "max": "Max",
+            "p50": "p50",
+            "p75": "p75",
+            "p95": "p95",
+            "p99": "p99"
+        }
+    },
+    "health": {
+        "title": "Diagnostics",
+        "refresh.button": "Rafraichir",
+        "indicator": {
+            "db": "Base de données",
+            "diskSpace": "Espace disque",
+            "mail": "Email",
+            "mongo": "MongoDB"
+        },
+        "stacktrace": "Stacktrace",
+        "table": {
+            "service": "Nom du service",
+            "status": "Etat"
+        },
+        "status": {
+            "UP": "DISPONIBLE",
+            "DOWN": "HORS SERVICE"
+        }
+    },
+    "configuration": {
+        "title": "Configuration",
+        "filter": "Filtrer (par préfixe)",
+        "table": {
+            "prefix": "Préfixe",
+            "properties": "Propriétés"
         }
     },
     "logs": {

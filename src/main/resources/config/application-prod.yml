@@ -2,23 +2,20 @@ server:
     port: 8080
 
 spring:
-    profiles: prod
+    profiles:
+        active: prod
 
     datasource:
-        dataSourceClassName: com.mysql.jdbc.jdbc2.optional.MysqlDataSource
-        url: jdbc:mysql://localhost:3306/solr-press
-        databaseName:
-        serverName:
-        username: root
-        password:
-        cachePrepStmts: true
-        prepStmtCacheSize: 250
-        prepStmtCacheSqlLimit: 2048
-        useServerPrepStmts: true
+        dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
+        url:
+        databaseName: SolrPress
+        serverName: localhost
+        username: ferdous
+        password: f
 
     jpa:
-        database-platform: org.hibernate.dialect.MySQLInnoDBDialect
-        database: MYSQL
+        database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+        database: POSTGRESQL
         openInView: false
         show_sql: false
         generate-ddl: false
@@ -47,6 +44,7 @@ metrics:
         enabled: false
         host: localhost
         port: 2003
+        prefix: SolrPress
 
 cache:
     timeToLiveSeconds: 3600

@@ -1,4 +1,4 @@
-angular.module('solrPressAppUtils', [])
+angular.module('solrpressAppUtils', [])
     .service('Base64Service', function () {
         var keyStr = "ABCDEFGHIJKLMNOP" +
             "QRSTUVWXYZabcdef" +
@@ -87,7 +87,7 @@ angular.module('solrPressAppUtils', [])
                 localStorage.removeItem(key);
             },
 
-            clearAll : function () {
+            clearAll: function () {
                 localStorage.clear();
             }
         };

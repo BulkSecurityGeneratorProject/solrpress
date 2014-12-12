@@ -17,28 +17,23 @@
             overflowToDisk="false"
             />
 
-    <cache name="com.dynamicguy.solrpress.domain.User"
+    <cache name="com.dynamicguy.app.domain.User"
            timeToLiveSeconds="3600">
     </cache>
 
-    <cache name="com.dynamicguy.solrpress.domain.Authority"
+    <cache name="com.dynamicguy.app.domain.Authority"
            timeToLiveSeconds="3600">
     </cache>
 
-    <cache name="com.dynamicguy.solrpress.domain.User.authorities"
+    <cache name="com.dynamicguy.app.domain.User.authorities"
            timeToLiveSeconds="3600">
     </cache>
 
-    <cache name="com.dynamicguy.solrpress.domain.PersistentToken"
+    <cache name="com.dynamicguy.app.domain.PersistentToken"
            timeToLiveSeconds="3600">
     </cache>
 
-    <cache name="com.dynamicguy.solrpress.domain.User.persistentTokens"
-           timeToLiveSeconds="3600">
-    </cache>
-
-    <cache name="com.dynamicguy.solrpress.domain.PersistentAuditEvent"
+    <cache name="com.dynamicguy.app.domain.User.persistentTokens"
            timeToLiveSeconds="3600">
     </cache>
 </ehcache>
-

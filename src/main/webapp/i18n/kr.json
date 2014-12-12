@@ -1,9 +1,12 @@
 {
     "global": {
-        "title": "solr-press",
+        "title": "SolrPress",
         "browsehappy": "당신은 <strong>오래된</strong> 브라우저를 사용하고 있군요. <a href=\"http://browsehappy.com/?locale=en\">브라우저를 업그레이드</a> 해 당신의 경험을 발전시키세요.",
         "menu": {
             "home": "홈",
+            "entities": {
+                "main": "Entities"
+            },
             "account": {
                 "main": "계정",
                 "settings": "설정",
@@ -11,6 +14,8 @@
                 "sessions": "세션",
                 "tracker": "사용자 트랙커",
                 "metrics": "메트릭스",
+                "health": "상태 확인",
+                "configuration": "Configuration",
                 "logs": "로그",
                 "audits": "Audit",
                 "login": "인증",
@@ -93,13 +98,15 @@
                 "login": {
                     "required": "login 입력이 필요합니다",
                     "minlength": "login은 적어도 1자 이상이어야 합니다",
-                    "maxlength": "login은 최대 50자 까지입니다 "
+                    "maxlength": "login은 최대 50자 까지입니다 ",
+                    "pattern": "Your login can only contain lower-case letters and digits"
                 }
             },
             "success": "<strong>회원가입 내용이 저장되었습니다!</strong> 가입을 완료하기 위해 이메일을 확인해주세요.",
             "error": {
                 "fail": "<strong>회원가입이 실패했습니다!</strong> 다시 시도해 주세요.",
-                "userexists": "<strong>로그인 아이디가 이미 존재합니다!</strong> 다른 아이디로 다시 시도해 주세요."
+                "userexists": "<strong>로그인 아이디가 이미 존재합니다!</strong> 다른 아이디로 다시 시도해 주세요.",
+                "emailexists": "<strong>E-mail is already in use!</strong> Please choose another one."
             }
         }
     },
@@ -127,7 +134,10 @@
             "button": "저장"
         },
         "messages": {
-            "error": "<strong>에러가 발생했습니다!</strong> 사용자 설정은 저장되지 않습니다.",
+            "error": {
+                "fail": "<strong>에러가 발생했습니다!</strong> 사용자 설정은 저장되지 않습니다.",
+                "emailexists": "<strong>E-mail is already in use!</strong> Please choose another one."
+            },
             "success": "<strong>사용자 설정 저장 완료!</strong>",
             "validate": {
                 "firstname": {
@@ -179,12 +189,7 @@
     "metrics": {
         "title": "애플리케이션 메트릭스",
         "refresh.button": "새로고침",
-        "health": {
-            "title": "상태 확인",
-            "database": "데이터베이스: ",
-            "email": "이메일: ",
-            "stacktrace": "스택트레이스"
-        },
+        "updating": "업데이트...",
         "jvm": {
             "title": "JVM 메트릭스",
             "memory": {
@@ -259,6 +264,46 @@
             "misses": "실패(Misses)",
             "evictioncount": "제거(Eviction) 횟수",
             "mean": "평균시간 (밀리초)"
+        },
+        "datasource": {
+        	"usage": "Usage",
+            "title": "DataSource statistics (time in millisecond)",
+            "name": "Pool usage",
+            "count": "Count",
+            "mean": "Mean",
+            "min": "Min",
+            "max": "Max",
+            "p50": "p50",
+            "p75": "p75",
+            "p95": "p95",
+            "p99": "p99"
+        }
+    },
+    "health": {
+        "title": "상태 확인",
+        "refresh.button": "새로고침",
+        "indicator": {
+            "db": "데이터베이스",
+            "diskSpace": "Disk space",
+            "mail": "이메일",
+            "mongo": "Mongo DB"
+        },
+        "stacktrace": "스택트레이스",
+        "table": {
+            "service": "서비스 이름",
+            "status": "상태"
+        },
+        "status": {
+            "UP": "사용할 수",
+            "DOWN": "서비스 중"
+        }
+    },
+    "configuration": {
+        "title": "Configuration",
+        "filter": "Filter (by prefix)",
+        "table": {
+            "prefix": "Prefix",
+            "properties": "Properties"
         }
     },
     "logs": {

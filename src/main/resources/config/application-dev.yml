@@ -2,19 +2,20 @@ server:
     port: 8080
 
 spring:
-    profiles: dev
+    profiles:
+        active: dev
 
     datasource:
-        dataSourceClassName: org.h2.jdbcx.JdbcDataSource
-        url: jdbc:h2:mem:jhipster
-        databaseName:
-        serverName:
-        username:
-        password:
+        dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
+        url:
+        databaseName: SolrPress
+        serverName: localhost
+        username: ferdous
+        password: f
 
     jpa:
-        database-platform: org.hibernate.dialect.H2Dialect
-        database: H2
+        database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+        database: POSTGRESQL
         openInView: false
         show_sql: true
         generate-ddl: false
@@ -29,6 +30,14 @@ spring:
 
     mail:
         baseUrl: http://localhost:8080
+        host: localhost
+        port: 25
+        user:
+        password:
+        protocol: smtp
+        tls: false
+        auth: false
+        from: ferdous@localhost
 
     thymeleaf:
         mode: XHTML
@@ -41,23 +50,9 @@ metrics:
         enabled: false
         host: localhost
         port: 2003
+        prefix: SolrPress
 
 cache:
     timeToLiveSeconds: 3600
     ehcache:
         maxBytesLocalHeap: 16M
-
-# You can add as many as folders to watch
-# You just need to add a dash + the directory to watch
-hotReload:
-    enabled: true
-    package:
-      project: com.dynamicguy.solrpress
-      domain: com.dynamicguy.solrpress.domain
-      restdto: com.dynamicguy.solrpress.web.rest.dto
-    liquibase:
-      defaultCatalogName:
-      defaultSchema: public
-      excludeTables: T_AUTHORITY,T_PERSISTENT_AUDIT_EVENT,T_PERSISTENT_AUDIT_EVENT_DATA,T_PERSISTENT_TOKEN,T_USER,T_USER_AUTHORITY
-    watchdir:
-      - target/classes
