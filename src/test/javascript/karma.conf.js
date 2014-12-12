@@ -11,9 +11,10 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
+            'src/main/webapp/bower_components/modernizr/modernizr.js',
             'src/main/webapp/bower_components/jquery/dist/jquery.js',
             'src/main/webapp/bower_components/angular/angular.js',
-            'src/main/webapp/bower_components/angular-route/angular-route.js',
+            'src/main/webapp/bower_components/angular-ui-router/release/angular-ui-router.js',
             'src/main/webapp/bower_components/angular-resource/angular-resource.js',
             'src/main/webapp/bower_components/angular-cookies/angular-cookies.js',
             'src/main/webapp/bower_components/angular-sanitize/angular-sanitize.js',
@@ -24,18 +25,9 @@ module.exports = function (config) {
             'src/main/webapp/bower_components/angular-cache-buster/angular-cache-buster.js',
             'src/main/webapp/bower_components/atmosphere/atmosphere.js',
             'src/main/webapp/bower_components/jquery-atmosphere/jquery.atmosphere.js',
-            'src/main/webapp/bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js',
-            'src/main/webapp/bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js',
-            'src/main/webapp/bower_components/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js',
-            'src/main/webapp/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js',
-            'src/main/webapp/bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js',
-            'src/main/webapp/bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js',
-            'src/main/webapp/bower_components/bootstrap-sass/assets/javascripts/bootstrap/button.js',
-            'src/main/webapp/bower_components/bootstrap-sass/assets/javascripts/bootstrap/popover.js',
-            'src/main/webapp/bower_components/bootstrap-sass/assets/javascripts/bootstrap/carousel.js',
-            'src/main/webapp/bower_components/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js',
-            'src/main/webapp/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js',
-            'src/main/webapp/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js',
+            'src/main/webapp/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+            'src/main/webapp/bower_components/bootstrap-material-design/dist/js/ripples.min.js',
+            'src/main/webapp/bower_components/bootstrap-material-design/dist/js/material.min.js',
             'src/main/webapp/scripts/*.js',
             'src/main/webapp/scripts/**/*.js',
             'src/test/javascript/**/!(karma.conf).js'
@@ -52,7 +44,7 @@ module.exports = function (config) {
         logLevel: config.LOG_INFO,
 
         // enable / disable watching file and executing tests whenever any file changes
-        autoWatch: true,
+        autoWatch: false,
 
         // Start these browsers, currently available:
         // - Chrome
