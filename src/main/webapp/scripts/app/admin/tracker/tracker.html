@@ -5,21 +5,21 @@
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
-                <tr>
-                    <th translate="tracker.table.userlogin">User</th>
-                    <th translate="tracker.table.ipaddress">IP Address</th>
-                    <th translate="tracker.table.page">Current page</th>
-                    <th translate="tracker.table.time">Time</th>
-                    <th></th>
-                </tr>
+            <tr>
+                <th translate="tracker.table.userlogin">User</th>
+                <th translate="tracker.table.ipaddress">IP Address</th>
+                <th translate="tracker.table.page">Current page</th>
+                <th translate="tracker.table.time">Time</th>
+                <th></th>
+            </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="activity in activities">
-                    <td>{{activity.userLogin}}</td>
-                    <td>{{activity.ipAddress}}</td>
-                    <td>{{activity.page}}</td>
-                    <td>{{activity.time}}</td>
-                </tr>
+            <tr ng-repeat="activity in activities">
+                <td>{{activity.userLogin}}</td>
+                <td>{{activity.ipAddress}}</td>
+                <td>{{activity.page}}</td>
+                <td>{{activity.time}}</td>
+            </tr>
             </tbody>
         </table>
     </div>

@@ -3,6 +3,12 @@
 
 var gulp = require('gulp'),
     prefix = require('gulp-autoprefixer'),
+    gutil = require('gulp-util'),
+    coffee = require('gulp-coffee'),
+    angularFilesort = require('gulp-angular-filesort'),
+    inject = require('gulp-inject'),
+    jade = require('jade'),
+    gulpJade = require('gulp-jade'),
     minifyCss = require('gulp-minify-css'),
     usemin = require('gulp-usemin'),
     uglify = require('gulp-uglify'),
@@ -29,6 +35,21 @@ var yeoman = {
     tmp: '.tmp/',
     scss: 'src/main/scss/'
 };
+
+gulp.task('coffee', function () {
+    return gulp.src(yeoman.app + 'scripts/**/*.coffee')
+        .pipe(coffee({bare: true}).on('error', gutil.log))
+        .pipe(gulp.dest(yeoman.app + 'scripts/'));
+});
+
+gulp.task('jade', function () {
+    return gulp.src(yeoman.app + 'scripts/**/*.jade')
+        .pipe(gulpJade({
+            jade: jade,
+            pretty: true
+        }))
+        .pipe(gulp.dest(yeoman.app + 'scripts/'));
+});
 
 gulp.task('clean', function () {
     return gulp.src(yeoman.dist, {read: false}).

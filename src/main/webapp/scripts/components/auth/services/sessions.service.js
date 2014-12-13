@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('solrpressApp')
-    .factory('Sessions', function ($resource) {
-        return $resource('api/account/sessions/:series', {}, {
-            'getAll': { method: 'GET', isArray: true}
-        });
-    });
+	.factory('Sessions', function ($resource) {
+		return $resource('api/account/sessions/:series', {}, {
+			'getAll': { method: 'GET', isArray: true}
+		});
+	});
 
 
 

@@ -1,0 +1,46 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Title",
+            "fieldNameUnderscored": "title"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Description",
+            "fieldNameUnderscored": "description"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "created",
+            "fieldType": "LocalDate",
+            "fieldNameCapitalized": "Created",
+            "fieldNameUnderscored": "created"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "update",
+            "fieldType": "LocalDate",
+            "fieldNameCapitalized": "Update",
+            "fieldNameUnderscored": "update"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "status",
+            "fieldType": "Boolean",
+            "fieldNameCapitalized": "Status",
+            "fieldNameUnderscored": "status"
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOneToMany": false,
+    "fieldsContainLocalDate": true,
+    "fieldsContainCustomTime": true,
+    "fieldsContainBigDecimal": false,
+    "fieldsContainDateTime": false
+}
