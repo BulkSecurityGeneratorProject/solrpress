@@ -22,7 +22,7 @@ spring:
         protocol: smtp
         tls: false
         auth: false
-        from: ferdous@localhost
+        from: SolrPress@localhost
 
     messageSource:
         cacheSeconds: 1

@@ -1,6 +1,7 @@
 package com.dynamicguy.app.service;
 
 import com.dynamicguy.app.Application;
+import com.dynamicguy.app.config.MongoConfiguration;
 import com.dynamicguy.app.domain.PersistentToken;
 import com.dynamicguy.app.domain.User;
 import com.dynamicguy.app.repository.PersistentTokenRepository;
@@ -10,12 +11,11 @@ import org.joda.time.LocalDate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.inject.Inject;
-
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-@Transactional
+@Import(MongoConfiguration.class)
 public class UserServiceTest {
 
     @Inject
@@ -42,7 +42,7 @@ public class UserServiceTest {
 
     @Test
     public void testRemoveOldPersistentTokens() {
-        User admin = userRepository.findOne("admin");
+        User admin = userRepository.findOneByLogin("admin");
         int existingCount = persistentTokenRepository.findByUser(admin).size();
         generateUserToken(admin, "1111-1111", new LocalDate());
         LocalDate now = new LocalDate();
@@ -56,7 +56,7 @@ public class UserServiceTest {
     public void testFindNotActivatedUsersByCreationDateBefore() {
         userService.removeNotActivatedUsers();
         DateTime now = new DateTime();
-        List<User> users = userRepository.findNotActivatedUsersByCreationDateBefore(now.minusDays(3));
+        List<User> users = userRepository.findAllByActivatedIsFalseAndCreatedDateBefore(now.minusDays(3));
         assertThat(users).isEmpty();
     }
 
@@ -68,6 +68,6 @@ public class UserServiceTest {
         token.setTokenDate(localDate);
         token.setIpAddress("127.0.0.1");
         token.setUserAgent("Test agent");
-        persistentTokenRepository.saveAndFlush(token);
+        persistentTokenRepository.save(token);
     }
 }

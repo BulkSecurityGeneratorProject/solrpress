@@ -1,6 +1,7 @@
 package com.dynamicguy.app.web.rest;
 
 import com.dynamicguy.app.Application;
+import com.dynamicguy.app.config.MongoConfiguration;
 import com.dynamicguy.app.domain.Authority;
 import com.dynamicguy.app.domain.User;
 import com.dynamicguy.app.repository.UserRepository;
@@ -12,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -40,6 +42,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
+@Import(MongoConfiguration.class)
 public class AccountResourceTest {
 
     @Inject
@@ -61,7 +64,7 @@ public class AccountResourceTest {
 
     @Test
     public void testNonAuthenticatedUser() throws Exception {
-        restUserMockMvc.perform(get("/app/rest/authenticate")
+        restUserMockMvc.perform(get("/api/authenticate")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(""));
@@ -70,7 +73,7 @@ public class AccountResourceTest {
 
     @Test
     public void testAuthenticatedUser() throws Exception {
-        restUserMockMvc.perform(get("/app/rest/authenticate")
+        restUserMockMvc.perform(get("/api/authenticate")
                 .with(new RequestPostProcessor() {
                     public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
                         request.setRemoteUser("test");
@@ -97,7 +100,7 @@ public class AccountResourceTest {
         user.setAuthorities(authorities);
         when(userService.getUserWithAuthorities()).thenReturn(user);
 
-        restUserMockMvc.perform(get("/app/rest/account")
+        restUserMockMvc.perform(get("/api/account")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -112,7 +115,7 @@ public class AccountResourceTest {
     public void testGetUnknownAccount() throws Exception {
         when(userService.getUserWithAuthorities()).thenReturn(null);
 
-        restUserMockMvc.perform(get("/app/rest/account")
+        restUserMockMvc.perform(get("/api/account")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
     }

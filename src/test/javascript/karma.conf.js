@@ -1,37 +1,38 @@
+'use strict';
 // Karma configuration
 // http://karma-runner.github.io/0.10/config/configuration-file.html
 
 module.exports = function (config) {
     config.set({
         // base path, that will be used to resolve files and exclude
-        basePath: '../../..',
+        basePath: '../../',
 
         // testing framework to use (jasmine/mocha/qunit/...)
         frameworks: ['jasmine'],
 
         // list of files / patterns to load in the browser
         files: [
-            'src/main/webapp/bower_components/modernizr/modernizr.js',
-            'src/main/webapp/bower_components/jquery/dist/jquery.js',
-            'src/main/webapp/bower_components/angular/angular.js',
-            'src/main/webapp/bower_components/angular-ui-router/release/angular-ui-router.js',
-            'src/main/webapp/bower_components/angular-resource/angular-resource.js',
-            'src/main/webapp/bower_components/angular-cookies/angular-cookies.js',
-            'src/main/webapp/bower_components/angular-sanitize/angular-sanitize.js',
-            'src/main/webapp/bower_components/angular-translate/angular-translate.js',
-            'src/main/webapp/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js',
-            'src/main/webapp/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
-            'src/main/webapp/bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js',
-            'src/main/webapp/bower_components/angular-cache-buster/angular-cache-buster.js',
-            'src/main/webapp/bower_components/atmosphere/atmosphere.js',
-            'src/main/webapp/bower_components/jquery-atmosphere/jquery.atmosphere.js',
-            'src/main/webapp/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-            'src/main/webapp/bower_components/bootstrap-material-design/dist/js/ripples.min.js',
-            'src/main/webapp/bower_components/bootstrap-material-design/dist/js/material.min.js',
-            'src/main/webapp/scripts/*.js',
-            'src/main/webapp/scripts/**/*.js',
-            'src/test/javascript/**/!(karma.conf).js'
+            'main/webapp/bower_components/modernizr/modernizr.js',
+            'main/webapp/bower_components/jquery/dist/jquery.js',
+            'main/webapp/bower_components/angular/angular.js',
+            'main/webapp/bower_components/angular-mocks/angular-mocks.js',
+            'main/webapp/bower_components/angular-ui-router/release/angular-ui-router.js',
+            'main/webapp/bower_components/angular-resource/angular-resource.js',
+            'main/webapp/bower_components/angular-cookies/angular-cookies.js',
+            'main/webapp/bower_components/angular-sanitize/angular-sanitize.js',
+            'main/webapp/bower_components/angular-translate/angular-translate.js',
+            'main/webapp/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js',
+            'main/webapp/bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js',
+            'main/webapp/bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js',
+            'main/webapp/bower_components/angular-local-storage/dist/angular-local-storage.min.js',
+            'main/webapp/bower_components/angular-cache-buster/angular-cache-buster.js',
+            'main/webapp/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+            'main/webapp/scripts/app/app.js',
+            'main/webapp/scripts/app/**/*.js',
+            'main/webapp/scripts/components/**/*.js',
+            'test/javascript/**/!(karma.conf).js'
         ],
+
 
         // list of files / patterns to exclude
         exclude: [],

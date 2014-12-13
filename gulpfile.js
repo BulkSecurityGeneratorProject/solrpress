@@ -1,12 +1,8 @@
+// Generated on 2014-12-13 using generator-jhipster 1.10.0
 'use strict';
 
 var gulp = require('gulp'),
     prefix = require('gulp-autoprefixer'),
-    gutil = require('gulp-util'),
-    coffee = require('gulp-coffee'),
-    jade = require('jade'),
-    gulpJade = require('gulp-jade'),
-    mainBowerFiles = require('main-bower-files'),
     minifyCss = require('gulp-minify-css'),
     usemin = require('gulp-usemin'),
     uglify = require('gulp-uglify'),
@@ -22,7 +18,6 @@ var gulp = require('gulp'),
     es = require('event-stream'),
     flatten = require('gulp-flatten'),
     clean = require('gulp-clean'),
-    sourcemaps = require('gulp-sourcemaps'),
     replace = require('gulp-replace');
 
 var karma = require('gulp-karma')({configFile: 'src/test/javascript/karma.conf.js'});
@@ -34,41 +29,6 @@ var yeoman = {
     tmp: '.tmp/',
     scss: 'src/main/scss/'
 };
-
-gulp.task('index', function () {
-    var inject = require('gulp-inject');
-    var target = gulp.src(yeoman.app + 'index.html');
-    // It's not necessary to read the files (will speed up things), we're only after their paths:
-    var sources = gulp.src([yeoman.app + 'scripts/**/*.js', yeoman.app + 'styles/**/*.css'], {read: false});
-
-    return target.pipe(inject(sources))
-        .pipe(gulp.dest(yeoman.app));
-});
-
-gulp.task('inject', function () {
-    var angularFilesort = require('gulp-angular-filesort');
-    var inject = require('gulp-inject');
-    gulp.src(yeoman.app + 'index.html')
-        .pipe(inject(
-            gulp.src([yeoman.app + './scripts/**/*.js']).pipe(angularFilesort())
-        ))
-        .pipe(gulp.dest(yeoman.app));
-});
-
-gulp.task('coffee', function () {
-    return gulp.src(yeoman.app + 'scripts/**/*.coffee')
-        .pipe(coffee({bare: true}).on('error', gutil.log))
-        .pipe(gulp.dest(yeoman.app + 'scripts/'));
-});
-
-gulp.task('jade', function () {
-    return gulp.src(yeoman.app + 'scripts/**/*.jade')
-        .pipe(gulpJade({
-            jade: jade,
-            pretty: true
-        }))
-        .pipe(gulp.dest(yeoman.dist + 'views/'));
-});
 
 gulp.task('clean', function () {
     return gulp.src(yeoman.dist, {read: false}).
@@ -98,6 +58,7 @@ gulp.task('images', function () {
         pipe(gulp.dest(yeoman.dist + 'images'));
 });
 
+
 gulp.task('compass', function () {
     return gulp.src(yeoman.scss + '{,*/}*.scss').
         pipe(compass({
@@ -113,6 +74,7 @@ gulp.task('compass', function () {
         })).
         pipe(gulp.dest(yeoman.tmp + 'styles'));
 });
+
 
 gulp.task('styles', [ 'compass'], function () {
     return gulp.src(yeoman.app + '{,*/}*.css').
@@ -130,8 +92,8 @@ gulp.task('server', ['watch', 'compass'], function () {
                     (function () {
                         var url = require('url');
                         var proxy = require('proxy-middleware');
-                        var options = url.parse('http://localhost:8080/app');
-                        options.route = '/app';
+                        var options = url.parse('http://localhost:8080/api');
+                        options.route = '/api';
                         return proxy(options);
                     })(),
                     (function () {
@@ -194,14 +156,14 @@ gulp.task('server:dist', ['build'], function () {
         {
             root: [yeoman.dist],
             port: 9000,
-            livereload: true,
+            //livereload: true,
             middleware: function (connect, o) {
                 return [
                     (function () {
                         var url = require('url');
                         var proxy = require('proxy-middleware');
-                        var options = url.parse('http://localhost:8080/app');
-                        options.route = '/app';
+                        var options = url.parse('http://localhost:8080/api');
+                        options.route = '/api';
                         return proxy(options);
                     })(),
                     (function () {
@@ -231,7 +193,7 @@ gulp.task('server:dist', ['build'], function () {
     );
 });
 
-gulp.task('build', ['clean', 'coffee', 'jade', 'copy'], function () {
+gulp.task('build', ['clean', 'copy'], function () {
     gulp.run('usemin');
 });
 
@@ -241,7 +203,7 @@ gulp.task('usemin', ['images', 'styles'], function () {
             css: [
                 prefix.apply(),
                 replace(/[0-9a-zA-Z\-_\s\.\/]*\/([a-zA-Z\-_\.0-9]*\.(woff|eot|ttf|svg))/g, '/fonts/$1'),
-                minifyCss(),
+                //minifyCss(),
                 'concat',
                 rev()
             ],

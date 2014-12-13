@@ -1,12 +1,12 @@
 {
     "node": true,
-    "browser": true,
     "esnext": true,
-    "bitwise": false,
-    "camelcase": false,
-    "curly": false,
+    "bitwise": true,
+    "camelcase": true,
+    "curly": true,
     "eqeqeq": true,
     "immed": true,
+    "indent": 4,
     "latedef": true,
     "newcap": true,
     "noarg": true,
@@ -16,27 +16,7 @@
     "unused": false,
     "strict": true,
     "trailing": true,
-    "smarttabs": false,
-    "globals": {
-        "jasmine": true,
-        "angular": true,
-        "ApplicationConfiguration": true
-    },
-    "predef": [
-        "define",
-        "require",
-        "exports",
-        "module",
-        "describe",
-        "before",
-        "beforeEach",
-        "after",
-        "afterEach",
-        "it",
-        "inject",
-        "expect"
-    ],
-    "indent": 4,
-    "devel": true,
-    "noempty": true
+    "smarttabs": true,
+    "white": true,
+    "predef": ["angular"]
 }

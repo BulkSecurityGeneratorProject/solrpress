@@ -74,7 +74,6 @@ public class CustomPersistentRememberMeServices extends
 
     @Inject
     public CustomPersistentRememberMeServices(Environment env, org.springframework.security.core.userdetails.UserDetailsService userDetailsService) {
-
         super(env.getProperty("jhipster.security.rememberme.key"), userDetailsService);
         random = new SecureRandom();
     }
@@ -93,7 +92,7 @@ public class CustomPersistentRememberMeServices extends
         token.setIpAddress(request.getRemoteAddr());
         token.setUserAgent(request.getHeader("User-Agent"));
         try {
-            persistentTokenRepository.saveAndFlush(token);
+            persistentTokenRepository.save(token);
             addCookie(token, request, response);
         } catch (DataAccessException e) {
             log.error("Failed to update token: ", e);
@@ -107,7 +106,7 @@ public class CustomPersistentRememberMeServices extends
         String login = successfulAuthentication.getName();
 
         log.debug("Creating new persistent login for user {}", login);
-        User user = userRepository.findOne(login);
+        User user = userRepository.findOneByLogin(login);
 
         PersistentToken token = new PersistentToken();
         token.setSeries(generateSeriesData());
@@ -117,7 +116,7 @@ public class CustomPersistentRememberMeServices extends
         token.setIpAddress(request.getRemoteAddr());
         token.setUserAgent(request.getHeader("User-Agent"));
         try {
-            persistentTokenRepository.saveAndFlush(token);
+            persistentTokenRepository.save(token);
             addCookie(token, request, response);
         } catch (DataAccessException e) {
             log.error("Failed to save persistent token ", e);
@@ -156,10 +155,8 @@ public class CustomPersistentRememberMeServices extends
             throw new InvalidCookieException("Cookie token did not contain " + 2 +
                     " tokens, but contained '" + Arrays.asList(cookieTokens) + "'");
         }
-
-        final String presentedSeries = cookieTokens[0];
-        final String presentedToken = cookieTokens[1];
-
+        String presentedSeries = cookieTokens[0];
+        String presentedToken = cookieTokens[1];
         PersistentToken token = persistentTokenRepository.findOne(presentedSeries);
 
         if (token == null) {
