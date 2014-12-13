@@ -29,7 +29,7 @@ var gulp = require('gulp'),
 var karma = require('gulp-karma')({configFile: 'src/test/javascript/karma.conf.js'});
 
 var yeoman = {
-    app: 'src/main/webapp/',//require('./bower.json').appPath || 'app',
+    app: require('./bower.json').appPath || 'app',
     dist: 'src/main/webapp/dist/',
     test: 'src/test/javascript/spec/',
     tmp: '.tmp/',
