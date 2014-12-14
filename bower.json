@@ -4,6 +4,29 @@
   "appPath": "src/main/webapp",
   "testPath": "src/test/javascript/spec",
   "private": true,
+  "keywords": [
+    "Solr",
+    "Press",
+    "CMF"
+  ],
+  "author": "Nurul Ferdous <nurul@ferdo.us>",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/dynamicguy/solrpress/blob/master/LICENSE"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.com:dynamicguy/solr-press.git"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "src/main/webapp/bower_components",
+    "test",
+    "tests"
+  ],
   "dependencies": {
     "atmosphere": "~2.2.5",
     "jquery-atmosphere": "~2.2.5",
