@@ -40,14 +40,14 @@ public class KeywordResourceTest {
     private static final String DEFAULT_DESCRIPTION = "SAMPLE_TEXT";
     private static final String UPDATED_DESCRIPTION = "UPDATED_TEXT";
 
+    private static final Boolean DEFAULT_ACTIVE = false;
+    private static final Boolean UPDATED_ACTIVE = true;
+
     private static final LocalDate DEFAULT_CREATED = new LocalDate(0L);
     private static final LocalDate UPDATED_CREATED = new LocalDate();
 
-    private static final LocalDate DEFAULT_UPDATE = new LocalDate(0L);
-    private static final LocalDate UPDATED_UPDATE = new LocalDate();
-
-    private static final Boolean DEFAULT_STATUS = false;
-    private static final Boolean UPDATED_STATUS = true;
+    private static final LocalDate DEFAULT_UPDATED = new LocalDate(0L);
+    private static final LocalDate UPDATED_UPDATED = new LocalDate();
 
     @Inject
     private KeywordRepository keywordRepository;
@@ -70,9 +70,9 @@ public class KeywordResourceTest {
         keyword = new Keyword();
         keyword.setTitle(DEFAULT_TITLE);
         keyword.setDescription(DEFAULT_DESCRIPTION);
+        keyword.setActive(DEFAULT_ACTIVE);
         keyword.setCreated(DEFAULT_CREATED);
-        keyword.setUpdate(DEFAULT_UPDATE);
-        keyword.setStatus(DEFAULT_STATUS);
+        keyword.setUpdated(DEFAULT_UPDATED);
     }
 
     @Test
@@ -92,9 +92,9 @@ public class KeywordResourceTest {
         Keyword testKeyword = keywords.iterator().next();
         assertThat(testKeyword.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testKeyword.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testKeyword.getActive()).isEqualTo(DEFAULT_ACTIVE);
         assertThat(testKeyword.getCreated()).isEqualTo(DEFAULT_CREATED);
-        assertThat(testKeyword.getUpdate()).isEqualTo(DEFAULT_UPDATE);
-        assertThat(testKeyword.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testKeyword.getUpdated()).isEqualTo(DEFAULT_UPDATED);
     }
 
     @Test
@@ -109,9 +109,9 @@ public class KeywordResourceTest {
                 .andExpect(jsonPath("$.[0].id").value(keyword.getId()))
                 .andExpect(jsonPath("$.[0].title").value(DEFAULT_TITLE.toString()))
                 .andExpect(jsonPath("$.[0].description").value(DEFAULT_DESCRIPTION.toString()))
+                .andExpect(jsonPath("$.[0].active").value(DEFAULT_ACTIVE.booleanValue()))
                 .andExpect(jsonPath("$.[0].created").value(DEFAULT_CREATED.toString()))
-                .andExpect(jsonPath("$.[0].update").value(DEFAULT_UPDATE.toString()))
-                .andExpect(jsonPath("$.[0].status").value(DEFAULT_STATUS.booleanValue()));
+                .andExpect(jsonPath("$.[0].updated").value(DEFAULT_UPDATED.toString()));
     }
 
     @Test
@@ -126,9 +126,9 @@ public class KeywordResourceTest {
             .andExpect(jsonPath("$.id").value(keyword.getId()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.active").value(DEFAULT_ACTIVE.booleanValue()))
             .andExpect(jsonPath("$.created").value(DEFAULT_CREATED.toString()))
-            .andExpect(jsonPath("$.update").value(DEFAULT_UPDATE.toString()))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.booleanValue()));
+            .andExpect(jsonPath("$.updated").value(DEFAULT_UPDATED.toString()));
     }
 
     @Test
@@ -146,9 +146,9 @@ public class KeywordResourceTest {
         // Update the keyword
         keyword.setTitle(UPDATED_TITLE);
         keyword.setDescription(UPDATED_DESCRIPTION);
+        keyword.setActive(UPDATED_ACTIVE);
         keyword.setCreated(UPDATED_CREATED);
-        keyword.setUpdate(UPDATED_UPDATE);
-        keyword.setStatus(UPDATED_STATUS);
+        keyword.setUpdated(UPDATED_UPDATED);
         restKeywordMockMvc.perform(post("/api/keywords")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(keyword)))
@@ -160,9 +160,9 @@ public class KeywordResourceTest {
         Keyword testKeyword = keywords.iterator().next();
         assertThat(testKeyword.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testKeyword.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testKeyword.getActive()).isEqualTo(UPDATED_ACTIVE);
         assertThat(testKeyword.getCreated()).isEqualTo(UPDATED_CREATED);
-        assertThat(testKeyword.getUpdate()).isEqualTo(UPDATED_UPDATE);
-        assertThat(testKeyword.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testKeyword.getUpdated()).isEqualTo(UPDATED_UPDATED);
     }
 
     @Test

@@ -29,7 +29,7 @@ var gulp = require('gulp'),
 var karma = require('gulp-karma')({configFile: 'src/test/javascript/karma.conf.js'});
 
 var yeoman = {
-    app: require('./bower.json').appPath || 'app',
+    app: 'src/main/webapp/scripts/',
     dist: 'src/main/webapp/dist/',
     test: 'src/test/javascript/spec/',
     tmp: '.tmp/',
@@ -177,7 +177,7 @@ gulp.task('server:dist', ['build'], function () {
         {
             root: [yeoman.dist],
             port: 9000,
-            //livereload: true,
+            livereload: true,
             middleware: function (connect, o) {
                 return [
                     (function () {
@@ -214,7 +214,7 @@ gulp.task('server:dist', ['build'], function () {
     );
 });
 
-gulp.task('build', ['clean', 'copy'], function () {
+gulp.task('build', ['clean', 'coffee', 'copy'], function () {
     gulp.run('usemin');
 });
 
@@ -224,7 +224,7 @@ gulp.task('usemin', ['images', 'styles'], function () {
             css: [
                 prefix.apply(),
                 replace(/[0-9a-zA-Z\-_\s\.\/]*\/([a-zA-Z\-_\.0-9]*\.(woff|eot|ttf|svg))/g, '/fonts/$1'),
-                //minifyCss(),
+                minifyCss(),
                 'concat',
                 rev()
             ],

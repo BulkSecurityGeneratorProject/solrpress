@@ -26,6 +26,9 @@ public class Keyword implements Serializable {
     @Field("description")
     private String description;
 
+    @Field("active")
+    private Boolean active;
+
     @JsonSerialize(using = CustomLocalDateSerializer.class)
     @JsonDeserialize(using = ISO8601LocalDateDeserializer.class)
     @Field("created")
@@ -33,11 +36,8 @@ public class Keyword implements Serializable {
 
     @JsonSerialize(using = CustomLocalDateSerializer.class)
     @JsonDeserialize(using = ISO8601LocalDateDeserializer.class)
-    @Field("update")
-    private LocalDate update;
-
-    @Field("status")
-    private Boolean status;
+    @Field("updated")
+    private LocalDate updated;
 
     public String getId() {
         return id;
@@ -63,6 +63,14 @@ public class Keyword implements Serializable {
         this.description = description;
     }
 
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
     public LocalDate getCreated() {
         return created;
     }
@@ -71,20 +79,12 @@ public class Keyword implements Serializable {
         this.created = created;
     }
 
-    public LocalDate getUpdate() {
-        return update;
+    public LocalDate getUpdated() {
+        return updated;
     }
 
-    public void setUpdate(LocalDate update) {
-        this.update = update;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setUpdated(LocalDate updated) {
+        this.updated = updated;
     }
 
     @Override
@@ -114,9 +114,9 @@ public class Keyword implements Serializable {
                 "id=" + id +
                 ", title='" + title + "'" +
                 ", description='" + description + "'" +
+                ", active='" + active + "'" +
                 ", created='" + created + "'" +
-                ", update='" + update + "'" +
-                ", status='" + status + "'" +
+                ", updated='" + updated + "'" +
                 '}';
     }
 }

@@ -17,24 +17,24 @@
         },
         {
             "fieldId": 3,
+            "fieldName": "active",
+            "fieldType": "Boolean",
+            "fieldNameCapitalized": "Active",
+            "fieldNameUnderscored": "active"
+        },
+        {
+            "fieldId": 4,
             "fieldName": "created",
             "fieldType": "LocalDate",
             "fieldNameCapitalized": "Created",
             "fieldNameUnderscored": "created"
         },
         {
-            "fieldId": 4,
-            "fieldName": "update",
-            "fieldType": "LocalDate",
-            "fieldNameCapitalized": "Update",
-            "fieldNameUnderscored": "update"
-        },
-        {
             "fieldId": 5,
-            "fieldName": "status",
-            "fieldType": "Boolean",
-            "fieldNameCapitalized": "Status",
-            "fieldNameUnderscored": "status"
+            "fieldName": "updated",
+            "fieldType": "LocalDate",
+            "fieldNameCapitalized": "Updated",
+            "fieldNameUnderscored": "updated"
         }
     ],
     "fieldsContainOwnerManyToMany": false,
