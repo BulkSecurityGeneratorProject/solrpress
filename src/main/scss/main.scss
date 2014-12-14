@@ -1,8 +1,8 @@
 $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 
 @import "../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
-@import "../bower_components/bootstrap-material-design/dist/css/ripples.min.css";
-@import "../bower_components/bootstrap-material-design/dist/css/material-wfont.min.css";
+@import "../bower_components/bootstrap-material-design/sass/ripples.scss";
+@import "../bower_components/bootstrap-material-design/sass/material-wfont.scss";
 @import "./ribbon.scss";
 
 body {

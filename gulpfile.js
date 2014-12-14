@@ -1,4 +1,4 @@
-// Generated on 2014-12-13 using generator-jhipster 1.10.0
+#!/usr/bin/env node
 'use strict';
 
 var gulp = require('gulp'),
