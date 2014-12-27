@@ -30,15 +30,16 @@ public class CustomAuditEventRepository {
 
             @Override
             public List<AuditEvent> find(String principal, Date after) {
-                Iterable<PersistentAuditEvent> persistentAuditEvents;
+                final Iterable<PersistentAuditEvent> persistentAuditEvents;
                 if (principal == null && after == null) {
                     persistentAuditEvents = persistenceAuditEventRepository.findAll();
                 } else if (after == null) {
                     persistentAuditEvents = persistenceAuditEventRepository.findByPrincipal(principal);
                 } else {
                     persistentAuditEvents =
-                            persistenceAuditEventRepository.findByPrincipalAndAuditEventDateAfter(principal, new LocalDateTime(after));
+                            persistenceAuditEventRepository.findByPrincipalAndAuditEventDateGreaterThan(principal, new LocalDateTime(after));
                 }
+
                 return auditEventConverter.convertToAuditEvent(persistentAuditEvents);
             }
 

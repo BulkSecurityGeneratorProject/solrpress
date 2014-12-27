@@ -41,9 +41,10 @@ public class UserService {
     @Inject
     private AuthorityRepository authorityRepository;
 
-    public  User activateRegistration(String key) {
+    public User activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
-        User user = userRepository.findOneByActivationKey(key);
+        User user = userRepository.getUserByActivationKey(key);
+
         // activate given user for the registration key.
         if (user != null) {
             user.setActivated(true);
@@ -79,7 +80,7 @@ public class UserService {
     }
 
     public void updateUserInformation(String firstName, String lastName, String email) {
-        User currentUser = userRepository.findOneByLogin(SecurityUtils.getCurrentLogin());
+        User currentUser = userRepository.findOne(SecurityUtils.getCurrentLogin());
         currentUser.setFirstName(firstName);
         currentUser.setLastName(lastName);
         currentUser.setEmail(email);
@@ -88,7 +89,7 @@ public class UserService {
     }
 
     public void changePassword(String password) {
-        User currentUser = userRepository.findOneByLogin(SecurityUtils.getCurrentLogin());
+        User currentUser = userRepository.findOne(SecurityUtils.getCurrentLogin());
         String encryptedPassword = passwordEncoder.encode(password);
         currentUser.setPassword(encryptedPassword);
         userRepository.save(currentUser);
@@ -96,7 +97,7 @@ public class UserService {
     }
 
     public User getUserWithAuthorities() {
-        User currentUser = userRepository.findOneByLogin(SecurityUtils.getCurrentLogin());
+        User currentUser = userRepository.findOne(SecurityUtils.getCurrentLogin());
         currentUser.getAuthorities().size(); // eagerly load the association
         return currentUser;
     }
@@ -129,7 +130,7 @@ public class UserService {
     @Scheduled(cron = "0 0 1 * * ?")
     public void removeNotActivatedUsers() {
         DateTime now = new DateTime();
-        List<User> users = userRepository.findAllByActivatedIsFalseAndCreatedDateBefore(now.minusDays(3));
+        List<User> users = userRepository.findNotActivatedUsersByCreationDateBefore(now.minusDays(3));
         for (User user : users) {
             log.debug("Deleting not activated user {}", user.getLogin());
             userRepository.delete(user);

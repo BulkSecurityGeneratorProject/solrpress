@@ -1,14 +1,26 @@
-$icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 
-@import "../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "../bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 @import "../bower_components/bootstrap-material-design/sass/ripples.scss";
 @import "../bower_components/bootstrap-material-design/sass/material-wfont.scss";
-@import "./ribbon.scss";
 
 body {
     background: #fafafa;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
+}
+
+.development {
+    position: absolute;
+    width: 149px;
+    height: 149px;
+    top: 0;
+    left: 0;
+    border: 0;
+    z-index: 1000;
+    background-image: url("../images/development_ribbon.png");
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
 .browserupgrade {
@@ -49,13 +61,12 @@ body {
 }
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
-@media
-only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and (   min--moz-device-pixel-ratio: 2),
-only screen and (     -o-min-device-pixel-ratio: 2/1),
-only screen and (        min-device-pixel-ratio: 2),
-only screen and (                min-resolution: 192dpi),
-only screen and (                min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min--moz-device-pixel-ratio: 2),
+only screen and (-o-min-device-pixel-ratio: 2/1),
+only screen and (min-device-pixel-ratio: 2),
+only screen and (min-resolution: 192dpi),
+only screen and (min-resolution: 2dppx) {
     .hipster {
         background: url("../images/hipster2x.png") no-repeat center top;
         background-size: contain;
@@ -64,29 +75,30 @@ only screen and (                min-resolution: 2dppx) {
 
 /* make sure browsers use the pointer cursor for anchors, even with no href */
 a:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
-
 
 /* start Password strength bar style */
 ul#strength {
-    display:inline;
-    list-style:none;
-    margin:0;
-    margin-left:15px;
-    padding:0;
-    vertical-align:2px;
+    display: inline;
+    list-style: none;
+    margin: 0;
+    margin-left: 15px;
+    padding: 0;
+    vertical-align: 2px;
 }
 
 .point:last {
-    margin:0 !important;
+    margin: 0 !important;
 }
+
 .point {
-    background:#DDD;
-    border-radius:2px;
-    display:inline-block;
-    height:5px;
-    margin-right:1px;
-    width:20px;
+    background: #DDD;
+    border-radius: 2px;
+    display: inline-block;
+    height: 5px;
+    margin-right: 1px;
+    width: 20px;
 }
+
 /* end Password strength bar style */

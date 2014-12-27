@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
 
     <parent>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -48,10 +39,52 @@
         <spring-cloud.version>1.1.0.RELEASE</spring-cloud.version>
         <swagger-springmvc.version>0.8.8</swagger-springmvc.version>
         <usertype-core.version>3.2.0.GA</usertype-core.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-annotation</artifactId>
+            <version>${dropwizard-metrics.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-graphite</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-healthchecks</artifactId>
+            <version>${dropwizard-metrics.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-json</artifactId>
+            <version>${dropwizard-metrics.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-jvm</artifactId>
+            <version>${dropwizard-metrics.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-servlet</artifactId>
+            <version>${dropwizard-metrics.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-servlets</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>metrics-healthchecks</artifactId>
+                    <groupId>io.dropwizard.metrics</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-hppc</artifactId>
@@ -108,16 +141,16 @@
             <version>${metrics-spring.version}</version>
             <exclusions>
                 <exclusion>
+                    <groupId>com.codahale.metrics</groupId>
                     <artifactId>metrics-annotation</artifactId>
-                    <groupId>com.codahale.metrics</groupId>
                 </exclusion>
                 <exclusion>
+                    <groupId>com.codahale.metrics</groupId>
                     <artifactId>metrics-core</artifactId>
-                    <groupId>com.codahale.metrics</groupId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>metrics-healthchecks</artifactId>
                     <groupId>com.codahale.metrics</groupId>
+                    <artifactId>metrics-healthchecks</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -156,49 +189,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>io.dropwizard.metrics</groupId>
-            <artifactId>metrics-annotation</artifactId>
-            <version>${dropwizard-metrics.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.dropwizard.metrics</groupId>
-            <artifactId>metrics-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.dropwizard.metrics</groupId>
-            <artifactId>metrics-graphite</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.dropwizard.metrics</groupId>
-            <artifactId>metrics-healthchecks</artifactId>
-            <version>${dropwizard-metrics.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.dropwizard.metrics</groupId>
-            <artifactId>metrics-json</artifactId>
-            <version>${dropwizard-metrics.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.dropwizard.metrics</groupId>
-            <artifactId>metrics-jvm</artifactId>
-            <version>${dropwizard-metrics.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.dropwizard.metrics</groupId>
-            <artifactId>metrics-servlet</artifactId>
-            <version>${dropwizard-metrics.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.dropwizard.metrics</groupId>
-            <artifactId>metrics-servlets</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>metrics-healthchecks</artifactId>
-                    <groupId>io.dropwizard.metrics</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
             <version>${javax.inject.version}</version>
@@ -224,8 +214,8 @@
             <version>${atmosphere-spring.version}</version>
             <exclusions>
                 <exclusion>
-                    <artifactId>atmosphere-runtime</artifactId>
                     <groupId>org.atmosphere</groupId>
+                    <artifactId>atmosphere-runtime</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -301,28 +291,27 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-localconfig-connector</artifactId>
+            <artifactId>spring-cloud-spring-service-connector</artifactId>
             <version>${spring-cloud.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-spring-service-connector</artifactId>
+            <artifactId>spring-cloud-localconfig-connector</artifactId>
             <version>${spring-cloud.version}</version>
         </dependency>
     </dependencies>
-
     <build>
         <resources>
             <resource>
-                <filtering>true</filtering>
                 <directory>src/main/resources</directory>
+                <filtering>true</filtering>
                 <includes>
                     <include>**/*.xml</include>
                 </includes>
             </resource>
             <resource>
-                <filtering>false</filtering>
                 <directory>src/main/resources</directory>
+                <filtering>false</filtering>
                 <excludes>
                     <exclude>**/*.xml</exclude>
                 </excludes>
@@ -349,7 +338,7 @@
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
-                                        <execute/>
+                                        <execute />
                                     </action>
                                 </pluginExecution>
                                 <pluginExecution>
@@ -362,7 +351,7 @@
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
-                                        <execute/>
+                                        <execute />
                                     </action>
                                 </pluginExecution>
                                 <pluginExecution>
@@ -376,7 +365,7 @@
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
-                                        <ignore/>
+                                        <ignore />
                                     </action>
                                 </pluginExecution>
                             </pluginExecutions>
@@ -430,14 +419,11 @@
                 <configuration>
                     <rules>
                         <requireMavenVersion>
-                            <message>You are running an older version of Maven. JHipster requires at least Maven 3.0
-                            </message>
+                            <message>You are running an older version of Maven. JHipster requires at least Maven 3.0</message>
                             <version>[3.0.0,)</version>
                         </requireMavenVersion>
                         <requireJavaVersion>
-                            <message>You are running an older version of Java. JHipster requires at least JDK
-                                ${java.version}
-                            </message>
+                            <message>You are running an older version of Java. JHipster requires at least JDK ${java.version}</message>
                             <version>[${java.version}.0,)</version>
                         </requireJavaVersion>
                     </rules>
@@ -448,8 +434,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <argLine>-XX:MaxPermSize=128m -Xmx256m</argLine>
-                    <!--<forkCount>1</forkCount>-->
-                    <!--<reuseForks>true</reuseForks>-->
+                    <forkCount>1</forkCount>
+                    <reuseForks>true</reuseForks>
                     <!-- Force alphabetical order to have a reproducible build -->
                     <runOrder>alphabetical</runOrder>
                 </configuration>
@@ -476,7 +462,7 @@
                             <workingDirectory>${project.basedir}</workingDirectory>
                             <arguments>
                                 <argument>${runprefix}</argument>
-                                <argument>./node_modules/.bin/gulp</argument>
+                                <argument>gulp</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -491,7 +477,7 @@
                             <workingDirectory>${project.basedir}</workingDirectory>
                             <arguments>
                                 <argument>${runprefix}</argument>
-                                <argument>./node_modules/.bin/gulp test</argument>
+                                <argument>gulp test</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -506,9 +492,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <jvmArguments>-Djava.rmi.server.hostname=localhost -Xdebug
-                        -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005
-                    </jvmArguments>
+                    <jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
                     <arguments>
                         <argument>--spring.profiles.active=dev</argument>
                     </arguments>
@@ -536,6 +520,16 @@
         </profile>
         <profile>
             <id>fast</id>
+            <properties>
+                <!-- log configuration -->
+                <logback.loglevel>DEBUG</logback.loglevel>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-undertow</artifactId>
+                </dependency>
+            </dependencies>
             <build>
                 <plugins>
                     <plugin>
@@ -549,19 +543,15 @@
                     </plugin>
                 </plugins>
             </build>
-            <properties>
-                <!-- log configuration -->
-                <logback.loglevel>DEBUG</logback.loglevel>
-            </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-undertow</artifactId>
-                </dependency>
-            </dependencies>
         </profile>
         <profile>
             <id>prod</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </dependency>
+            </dependencies>
             <build>
                 <plugins>
                     <plugin>
@@ -569,11 +559,6 @@
                         <artifactId>yeoman-maven-plugin</artifactId>
                         <version>0.2</version>
                         <executions>
-                            <execution>
-                                <goals>
-                                    <goal>build</goal>
-                                </goals>
-                            </execution>
                         </executions>
                         <configuration>
                             <yeomanProjectDirectory>${project.basedir}</yeomanProjectDirectory>
@@ -617,12 +602,6 @@
                 <!-- log configuration -->
                 <logback.loglevel>INFO</logback.loglevel>
             </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </dependency>
-            </dependencies>
         </profile>
         <profile>
             <id>Windows</id>

@@ -15,14 +15,13 @@ import java.util.Set;
 /**
  * A user.
  */
+
 @Document(collection = "T_USER")
 public class User extends AbstractAuditingEntity implements Serializable {
 
-    @Id
-    private String id;
-
     @NotNull
     @Size(min = 0, max = 50)
+    @Id
     private String login;
 
     @JsonIgnore
@@ -54,14 +53,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @JsonIgnore
     private Set<Authority> authorities = new HashSet<>();
     private Set<PersistentToken> persistentTokens = new HashSet<>();
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getLogin() {
         return login;

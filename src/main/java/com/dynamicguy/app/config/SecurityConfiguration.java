@@ -1,7 +1,6 @@
 package com.dynamicguy.app.config;
 
 import com.dynamicguy.app.security.*;
-import com.dynamicguy.app.web.filter.CsrfCookieGeneratorFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -17,7 +16,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.RememberMeServices;
-import org.springframework.security.web.csrf.CsrfFilter;
 
 import javax.inject.Inject;
 
@@ -61,21 +59,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-            .antMatchers("/app/**/*.{js,html}")
             .antMatchers("/bower_components/**")
-            .antMatchers("/components/**")
             .antMatchers("/fonts/**")
-            .antMatchers("/i18n/**")
             .antMatchers("/images/**")
+            .antMatchers("/scripts/**")
             .antMatchers("/styles/**")
-            .antMatchers("/swagger-ui/**")
-            .antMatchers("/test/**");
+            .antMatchers("/views/**")
+            .antMatchers("/i18n/**")
+            .antMatchers("/swagger-ui/**");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .addFilterAfter(new CsrfCookieGeneratorFilter(), CsrfFilter.class)
             .exceptionHandling()
             .authenticationEntryPoint(authenticationEntryPoint)
         .and()
@@ -84,7 +80,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .key(env.getProperty("jhipster.security.rememberme.key"))
         .and()
             .formLogin()
-            .loginProcessingUrl("/api/authentication")
+            .loginProcessingUrl("/app/authentication")
             .successHandler(ajaxAuthenticationSuccessHandler)
             .failureHandler(ajaxAuthenticationFailureHandler)
             .usernameParameter("j_username")
@@ -92,20 +88,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .permitAll()
         .and()
             .logout()
-            .logoutUrl("/api/logout")
+            .logoutUrl("/app/logout")
             .logoutSuccessHandler(ajaxLogoutSuccessHandler)
-            .deleteCookies("JSESSIONID", "hazelcast.sessionId", "CSRF-TOKEN")
+            .deleteCookies("JSESSIONID")
             .permitAll()
         .and()
+            .csrf()
+            .disable()
             .headers()
             .frameOptions()
             .disable()
             .authorizeRequests()
-                .antMatchers("/api/register").permitAll()
-                .antMatchers("/api/activate").permitAll()
-                .antMatchers("/api/authenticate").permitAll()
-                .antMatchers("/api/logs/**").hasAuthority(AuthoritiesConstants.ADMIN)
-                .antMatchers("/api/**").authenticated()
+                .antMatchers("/app/rest/register").permitAll()
+                .antMatchers("/app/rest/activate").permitAll()
+                .antMatchers("/app/rest/authenticate").permitAll()
+                .antMatchers("/app/rest/logs/**").hasAuthority(AuthoritiesConstants.ADMIN)
+                .antMatchers("/app/**").authenticated()
                 .antMatchers("/websocket/tracker").hasAuthority(AuthoritiesConstants.ADMIN)
                 .antMatchers("/websocket/**").permitAll()
                 .antMatchers("/metrics/**").hasAuthority(AuthoritiesConstants.ADMIN)

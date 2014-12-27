@@ -13,13 +13,19 @@ import com.dynamicguy.app.web.rest.dto.UserDTO;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.context.IWebContext;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.context.SpringWebContext;
 
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -29,10 +35,19 @@ import java.util.*;
  * REST controller for managing the current user's account.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/app")
 public class AccountResource {
 
     private final Logger log = LoggerFactory.getLogger(AccountResource.class);
+
+    @Inject
+    private ServletContext servletContext;
+
+    @Inject
+    private ApplicationContext applicationContext;
+
+    @Inject
+    private SpringTemplateEngine templateEngine;
 
     @Inject
     private UserRepository userRepository;
@@ -47,37 +62,33 @@ public class AccountResource {
     private MailService mailService;
 
     /**
-     * POST  /register -> register the user.
+     * POST  /rest/register -> register the user.
      */
-    @RequestMapping(value = "/register",
+    @RequestMapping(value = "/rest/register",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<?> registerAccount(@Valid @RequestBody UserDTO userDTO, HttpServletRequest request) {
-        User user = userRepository.findOneByLogin(userDTO.getLogin());
+    public ResponseEntity<?> registerAccount(@Valid @RequestBody UserDTO userDTO, HttpServletRequest request,
+                                             HttpServletResponse response) {
+        User user = userRepository.findOne(userDTO.getLogin());
         if (user != null) {
-            return ResponseEntity.badRequest().contentType(MediaType.TEXT_PLAIN).body("login already in use");
+            return new ResponseEntity<String>("login already in use", HttpStatus.BAD_REQUEST);
         } else {
             if (userRepository.findOneByEmail(userDTO.getEmail()) != null) {
-                return ResponseEntity.badRequest().contentType(MediaType.TEXT_PLAIN).body("e-mail address already in use");
+                return new ResponseEntity<String>("e-mail address already in use", HttpStatus.BAD_REQUEST);
             }
-            user = userService.createUserInformation(userDTO.getLogin(), userDTO.getPassword(),
-            userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail().toLowerCase(),
-            userDTO.getLangKey());
-            String baseUrl = request.getScheme() + // "http"
-            "://" +                            // "://"
-            request.getServerName() +          // "myhost"
-            ":" +                              // ":"
-            request.getServerPort();           // "80"
-
-            mailService.sendActivationEmail(user, baseUrl);
+            user = userService.createUserInformation(userDTO.getLogin(), userDTO.getPassword(), userDTO.getFirstName(),
+                    userDTO.getLastName(), userDTO.getEmail().toLowerCase(), userDTO.getLangKey());
+            final Locale locale = Locale.forLanguageTag(user.getLangKey());
+            String content = createHtmlContentFromTemplate(user, locale, request, response);
+            mailService.sendActivationEmail(user.getEmail(), content, locale);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
     }
     /**
-     * GET  /activate -> activate the registered user.
+     * GET  /rest/activate -> activate the registered user.
      */
-    @RequestMapping(value = "/activate",
+    @RequestMapping(value = "/rest/activate",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -86,13 +97,13 @@ public class AccountResource {
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<String>(HttpStatus.OK);
+        return new ResponseEntity<String>(user.getLogin(), HttpStatus.OK);
     }
 
     /**
-     * GET  /authenticate -> check if the user is authenticated, and return its login.
+     * GET  /rest/authenticate -> check if the user is authenticated, and return its login.
      */
-    @RequestMapping(value = "/authenticate",
+    @RequestMapping(value = "/rest/authenticate",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -102,9 +113,9 @@ public class AccountResource {
     }
 
     /**
-     * GET  /account -> get the current user.
+     * GET  /rest/account -> get the current user.
      */
-    @RequestMapping(value = "/account",
+    @RequestMapping(value = "/rest/account",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -130,25 +141,25 @@ public class AccountResource {
     }
 
     /**
-     * POST  /account -> update the current user information.
+     * POST  /rest/account -> update the current user information.
      */
-    @RequestMapping(value = "/account",
+    @RequestMapping(value = "/rest/account",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<String> saveAccount(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> saveAccount(@RequestBody UserDTO userDTO) {
         User userHavingThisEmail = userRepository.findOneByEmail(userDTO.getEmail());
         if (userHavingThisEmail != null && !userHavingThisEmail.getLogin().equals(SecurityUtils.getCurrentLogin())) {
-            return ResponseEntity.badRequest().contentType(MediaType.TEXT_PLAIN).body("e-mail address already in use");
+            return new ResponseEntity<String>("e-mail address already in use", HttpStatus.BAD_REQUEST);
         }
         userService.updateUserInformation(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /**
-     * POST  /change_password -> changes the current user's password
+     * POST  /rest/change_password -> changes the current user's password
      */
-    @RequestMapping(value = "/account/change_password",
+    @RequestMapping(value = "/rest/account/change_password",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -161,14 +172,14 @@ public class AccountResource {
     }
 
     /**
-     * GET  /account/sessions -> get the current open sessions.
+     * GET  /rest/account/sessions -> get the current open sessions.
      */
-    @RequestMapping(value = "/account/sessions",
+    @RequestMapping(value = "/rest/account/sessions",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<List<PersistentToken>> getCurrentSessions() {
-        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentLogin());
+        User user = userRepository.findOne(SecurityUtils.getCurrentLogin());
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -178,7 +189,7 @@ public class AccountResource {
     }
 
     /**
-     * DELETE  /account/sessions?series={series} -> invalidate an existing session.
+     * DELETE  /rest/account/sessions?series={series} -> invalidate an existing session.
      *
      * - You can only delete your own sessions, not any other user's session
      * - If you delete one of your existing sessions, and that you are currently logged in on that session, you will
@@ -190,17 +201,29 @@ public class AccountResource {
      *   There is an API to invalidate the current session, but there is no API to check which session uses which
      *   cookie.
      */
-    @RequestMapping(value = "/account/sessions/{series}",
+    @RequestMapping(value = "/rest/account/sessions/{series}",
             method = RequestMethod.DELETE)
     @Timed
     public void invalidateSession(@PathVariable String series) throws UnsupportedEncodingException {
         String decodedSeries = URLDecoder.decode(series, "UTF-8");
-        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentLogin());
+        User user = userRepository.findOne(SecurityUtils.getCurrentLogin());
         List<PersistentToken> persistentTokens = persistentTokenRepository.findByUser(user);
         for (PersistentToken persistentToken : persistentTokens) {
             if (StringUtils.equals(persistentToken.getSeries(), decodedSeries)) {
                 persistentTokenRepository.delete(decodedSeries);
             }
         }
+    }
+
+    private String createHtmlContentFromTemplate(final User user, final Locale locale, final HttpServletRequest request,
+                                                 final HttpServletResponse response) {
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("user", user);
+        variables.put("baseUrl", request.getScheme() + "://" +   // "http" + "://
+                                 request.getServerName() +       // "myhost"
+                                 ":" + request.getServerPort());
+        IWebContext context = new SpringWebContext(request, response, servletContext,
+                locale, variables, applicationContext);
+        return templateEngine.process("activationEmail", context);
     }
 }

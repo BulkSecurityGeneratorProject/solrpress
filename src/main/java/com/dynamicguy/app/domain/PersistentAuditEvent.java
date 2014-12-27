@@ -12,6 +12,8 @@ import java.util.Map;
  * Persist AuditEvent managed by the Spring Boot actuator
  * @see org.springframework.boot.actuate.audit.AuditEvent
  */
+
+
 @Document(collection = "T_PERSISTENT_AUDIT_EVENT")
 public class PersistentAuditEvent  {
 
@@ -22,10 +24,13 @@ public class PersistentAuditEvent  {
     @NotNull
     private String principal;
 
+    
     private LocalDateTime auditEventDate;
+    
     @Field("event_type")
     private String auditEventType;
 
+    
     private Map<String, String> data = new HashMap<>();
 
     public long getId() {

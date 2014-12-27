@@ -94,8 +94,9 @@ public class GZipServletFilter implements Filter {
      * Checks if the request uri is an include. These cannot be gzipped.
      */
     private boolean isIncluded(final HttpServletRequest request) {
-        String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
-        boolean includeRequest = !(uri == null);
+        final String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
+        final boolean includeRequest = !(uri == null);
+
         if (includeRequest && log.isDebugEnabled()) {
             log.debug("{} resulted in an include request. This is unusable, because"
                     + "the response will be assembled into the overrall response. Not gzipping.",

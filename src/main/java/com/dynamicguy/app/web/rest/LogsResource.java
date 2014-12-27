@@ -16,10 +16,10 @@ import java.util.List;
  * Controller for view and managing Log Level at runtime.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/app")
 public class LogsResource {
 
-    @RequestMapping(value = "/logs",
+    @RequestMapping(value = "/rest/logs",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -32,7 +32,7 @@ public class LogsResource {
         return loggers;
     }
 
-    @RequestMapping(value = "/logs",
+    @RequestMapping(value = "/rest/logs",
             method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Timed

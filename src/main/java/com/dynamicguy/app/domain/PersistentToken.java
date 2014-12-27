@@ -14,11 +14,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
+
 /**
  * Persistent tokens are used by Spring Security to automatically log in users.
  *
  * @see com.dynamicguy.app.security.CustomPersistentRememberMeServices
  */
+
 @Document(collection = "T_PERSISTENT_TOKEN")
 public class PersistentToken implements Serializable {
 

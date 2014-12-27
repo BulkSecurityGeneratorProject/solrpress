@@ -1,6 +1,4 @@
-'use strict';
-
-var atmosphere = {
+atmosphere = {
     AtmosphereRequest: function () {
         return {
             onError : function(response) {
@@ -19,7 +17,7 @@ var atmosphere = {
             },
             onLocalMessage : function (response) {
             }
-        };
+        }
     },
     subscribe: function (request) {
         var _request = request;
@@ -32,8 +30,8 @@ var atmosphere = {
                     isOpen: function() {
                         return false;
                     }
-                };
+                }
             }
-        };
+        }
     }
-};
+}

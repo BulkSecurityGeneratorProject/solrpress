@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
  * Base abstract class for entities which will hold definitions for created, last modified by and created,
  * last modified by date.
  */
+
 public abstract class AbstractAuditingEntity {
 
     @CreatedBy
