@@ -27,6 +27,13 @@ spring:
     messageSource:
         cacheSeconds: 1
 
+authentication:
+    oauth:
+        clientid: SolrPressapp
+        secret: mySecretOAuthSecret
+        # Token is valid 30 minutes
+        tokenValidityInSeconds: 1800
+
 swagger:
     title: SolrPress API
     description: SolrPress applications and beyond!

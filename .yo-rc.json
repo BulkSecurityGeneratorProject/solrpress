@@ -1,13 +1,13 @@
 {
   "generator-jhipster": {
     "baseName": "SolrPress",
-    "packageName": "com.dynamicguy.app",
-    "packageFolder": "com/dynamicguy/app",
-    "authenticationType": "cookie",
+    "packageName": "com.dynamicguy.solrpress",
+    "packageFolder": "com/dynamicguy/solrpress",
+    "authenticationType": "token",
     "hibernateCache": "no",
     "clusteredHttpSession": "no",
-    "websocket": "atmosphere",
-    "databaseType": "nosql",
+    "websocket": "spring-websocket",
+    "databaseType": "mongodb",
     "devDatabaseType": "mongodb",
     "prodDatabaseType": "mongodb",
     "useCompass": true,
