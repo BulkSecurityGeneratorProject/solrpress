@@ -2,23 +2,23 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" data-ng-hint data-ng-app="solrpressApp"> <!--<![endif]-->
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>SolrPress</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <title ng-bind-template="{{ title }} &mdash; SolrPress"></title>
+        <meta name="description" content=""/>
+        <meta name="viewport" content="width=device-width"/>
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css assets/styles/main.css -->
-        <link rel="stylesheet" href="assets/styles/main.css">
+        <link rel="stylesheet" href="assets/styles/main.css"/>
         <!-- endbuild -->
     </head>
-    <body ng-app="solrpressApp">
+    <body>
         <!--[if lt IE 10]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div class="development"></div>
+
         <div ui-view="navbar"></div>
         <div class="container">
             <div class="well" ui-view="content"></div>
@@ -27,6 +27,7 @@
                 <p translate="footer">This is your footer</p>
             </div>
         </div>
+        <div class="development"></div>
 
         <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
         <script>
@@ -125,6 +126,14 @@
         <script src="scripts/app/admin/tracker/tracker.js"></script>
         <script src="scripts/app/admin/tracker/tracker.controller.js"></script>
         <script src="scripts/components/tracker/tracker.service.js"></script>
+        <script src="scripts/app/entities/author/author.js"></script>
+        <script src="scripts/app/entities/author/author.controller.js"></script>
+        <script src="scripts/app/entities/author/author-detail.controller.js"></script>
+        <script src="scripts/components/entities/author/author.service.js"></script>
+        <script src="scripts/app/entities/keyword/keyword.js"></script>
+        <script src="scripts/app/entities/keyword/keyword.controller.js"></script>
+        <script src="scripts/app/entities/keyword/keyword-detail.controller.js"></script>
+        <script src="scripts/components/entities/keyword/keyword.service.js"></script>
         <!-- endbuild -->
 </body>
 </html>

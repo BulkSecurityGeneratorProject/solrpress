@@ -9,7 +9,7 @@ angular.module('solrpressApp', ['LocalStorageModule', 'tmh.dynamicLocale',
             $rootScope.toStateParams = toStateParams;
 
             $http.get('protected/authentication_check.gif', { ignoreErrors: true })
-                .error(function() {
+                .error(function () {
                     if ($rootScope.toState.data.roles.length > 0) {
                         Auth.logout();
                         $state.go('login');
@@ -26,12 +26,12 @@ angular.module('solrpressApp', ['LocalStorageModule', 'tmh.dynamicLocale',
             });
         });
 
-        $rootScope.$on('$stateChangeSuccess',  function(event, toState, toParams, fromState, fromParams) {
+        $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $rootScope.previousStateName = fromState.name;
             $rootScope.previousStateParams = fromParams;
         });
 
-        $rootScope.back = function() {
+        $rootScope.back = function () {
             // If previous state is 'activate' or do not exist go to 'home'
             if ($rootScope.previousStateName === 'activate' || $state.get($rootScope.previousStateName) === null) {
                 $state.go('home');
@@ -40,7 +40,7 @@ angular.module('solrpressApp', ['LocalStorageModule', 'tmh.dynamicLocale',
             }
         };
     })
-    
+
     .factory('authInterceptor', function ($rootScope, $q, $location, localStorageService) {
         return {
             // Add authorization token to headers
@@ -54,10 +54,10 @@ angular.module('solrpressApp', ['LocalStorageModule', 'tmh.dynamicLocale',
             }
         };
     })
-    
+
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $translateProvider, tmhDynamicLocaleProvider, httpRequestInterceptorCacheBusterProvider) {
-        
-    
+
+
         //Cache everything except rest api requests
         httpRequestInterceptorCacheBusterProvider.setMatchlist([/.*rest.*/, /.*protected.*/], true);
 
@@ -83,10 +83,10 @@ angular.module('solrpressApp', ['LocalStorageModule', 'tmh.dynamicLocale',
                 }]
             }
         });
-        
+
         $httpProvider.interceptors.push('authInterceptor');
 
-        // Initialize angular-translate    
+        // Initialize angular-translate
         $translateProvider.useLoader('$translatePartialLoader', {
             urlTemplate: 'i18n/{lang}/{part}.json'
         });

@@ -1,4 +1,4 @@
-// Generated on 2015-01-05 using generator-jhipster 1.10.0
+// Generated on 2015-01-08 using generator-jhipster 1.10.0
 /* jshint camelcase: false */
 'use strict';
 
@@ -19,6 +19,8 @@ var gulp = require('gulp'),
     flatten = require('gulp-flatten'),
     clean = require('gulp-clean'),
     replace = require('gulp-replace'),
+    coffee = require('gulp-coffee'),
+    gutil = require('gulp-util'),
     url = require('url');
 
 var karma = require('gulp-karma')({configFile: 'src/test/javascript/karma.conf.js'});
@@ -34,55 +36,61 @@ var yeoman = {
     liveReloadPort: 35729
 };
 
-gulp.task('clean', function() {
+gulp.task('clean', function () {
     return gulp.src(yeoman.dist, {read: false}).
         pipe(clean());
 });
 
-gulp.task('clean:tmp', function() {
+gulp.task('clean:tmp', function () {
     return gulp.src(yeoman.tmp, {read: false}).
         pipe(clean());
 });
 
-gulp.task('test', function() {
+gulp.task('test', function () {
     karma.once();
 });
 
-gulp.task('copy', ['clean'], function() {
+gulp.task('copy', ['clean'], function () {
     return es.merge(gulp.src(yeoman.app + 'i18n/**').
-              pipe(gulp.dest(yeoman.dist + 'i18n/')),
-              gulp.src(yeoman.app + 'assets/**/*.{woff,svg,ttf,eot}').
-              pipe(flatten()).
-              pipe(gulp.dest(yeoman.dist + 'assets/fonts/')));
+            pipe(gulp.dest(yeoman.dist + 'i18n/')),
+        gulp.src(yeoman.app + 'assets/**/*.{woff,svg,ttf,eot}').
+            pipe(flatten()).
+            pipe(gulp.dest(yeoman.dist + 'assets/fonts/')));
 });
 
-gulp.task('images', function() {
+gulp.task('images', function () {
     return gulp.src(yeoman.app + 'assets/images/**').
         pipe(imagemin({optimizationLevel: 5})).
         pipe(gulp.dest(yeoman.dist + 'assets/images')).
         pipe(connect.reload());
 });
 
-gulp.task('compass', function() {
+gulp.task('compass', function () {
     return gulp.src(yeoman.scss + '**/*.scss').
         pipe(compass({
-                project: __dirname,
-                sass: 'src/main/scss',
-                css: 'src/main/webapp/assets/styles',
-                generated_images: '.tmp/images/generated',
-                image: 'src/main/webapp/assets/images',
-                javascript: 'src/main/webapp/scripts',
-                font: 'src/main/webapp/assets/fonts',
-                import_path: 'src/main/webapp/bower_components',
-                relative: false
+            project: __dirname,
+            sass: 'src/main/scss',
+            css: 'src/main/webapp/assets/styles',
+            generated_images: '.tmp/images/generated',
+            image: 'src/main/webapp/assets/images',
+            javascript: 'src/main/webapp/scripts',
+            font: 'src/main/webapp/assets/fonts',
+            import_path: 'src/main/webapp/bower_components',
+            relative: false
         })).
         pipe(gulp.dest(yeoman.tmp + 'styles'));
 });
 
-gulp.task('styles', ['compass'], function() {
+gulp.task('styles', ['compass'], function () {
     return gulp.src(yeoman.app + 'assets/styles/**/*.css').
         pipe(gulp.dest(yeoman.tmp)).
         pipe(connect.reload());
+});
+
+gulp.task('coffee', function () {
+    gulp.src(yeoman.app + 'scripts/**/*.coffee')
+        .pipe(coffee({bare: true}).on('error', gutil.log))
+        .pipe(gulp.dest(yeoman.app + 'scripts/**'));
 });
 
 gulp.task('scripts', function () {
@@ -90,7 +98,7 @@ gulp.task('scripts', function () {
         pipe(connect.reload());
 });
 
-gulp.task('server', ['watch', 'compass'], function() {
+gulp.task('server', ['watch', 'compass'], function () {
     var baseUri = 'http://localhost:' + yeoman.apiPort;
     // Routes to proxy to the backend
     var proxyRoutes = [
@@ -109,7 +117,7 @@ gulp.task('server', ['watch', 'compass'], function() {
         livereload: {
             port: yeoman.liveReloadPort
         },
-        middleware: function() {
+        middleware: function () {
             // Build a list of proxies for routes: [route1_proxy, route2_proxy, ...]
             return proxyRoutes.map(function (r) {
                 var options = url.parse(baseUri + r);
@@ -120,14 +128,14 @@ gulp.task('server', ['watch', 'compass'], function() {
     });
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', function () {
     gulp.watch(yeoman.app + '*.html', ['usemin']);
     gulp.watch(yeoman.app + 'scripts/**', ['scripts']);
     gulp.watch(yeoman.scss + '**/*.scss', ['styles']);
     gulp.watch('src/images/**', ['images']);
 });
 
-gulp.task('server:dist', ['build'], function() {
+gulp.task('server:dist', ['build'], function () {
     var baseUri = 'http://localhost:' + yeoman.apiPort;
     // Routes to proxy to the backend
     var proxyRoutes = [
@@ -144,7 +152,7 @@ gulp.task('server:dist', ['build'], function() {
         /*livereload: {
          port: yeoman.liveReloadPort
          },*/
-        middleware: function() {
+        middleware: function () {
             // Build a list of proxies for routes: [route1_proxy, route2_proxy, ...]
             return proxyRoutes.map(function (r) {
                 var options = url.parse(baseUri + r);
@@ -159,18 +167,18 @@ gulp.task('build', ['copy'], function () {
     gulp.run('usemin');
 });
 
-gulp.task('usemin', ['images', 'styles'], function() {
+gulp.task('usemin', ['images', 'styles'], function () {
     return gulp.src(yeoman.app + '*.html').
         pipe(usemin({
             css: [
                 prefix.apply(),
                 replace(/[0-9a-zA-Z\-_\s\.\/]*\/([a-zA-Z\-_\.0-9]*\.(woff|eot|ttf|svg))/g, '/assets/fonts/$1'),
-                //minifyCss(),
+                minifyCss(),
                 'concat',
                 rev()
             ],
             html: [
-                minifyHtml({empty: true, conditionals:true})
+                minifyHtml({empty: true, conditionals: true})
             ],
             js: [
                 ngAnnotate(),
@@ -183,13 +191,13 @@ gulp.task('usemin', ['images', 'styles'], function() {
         pipe(connect.reload());
 });
 
-gulp.task('jshint', function() {
+gulp.task('jshint', function () {
     return gulp.src(['gulpfile.js', yeoman.app + 'scripts/**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('default', function() {
+gulp.task('default', function () {
     gulp.run('test');
     gulp.run('build');
 });

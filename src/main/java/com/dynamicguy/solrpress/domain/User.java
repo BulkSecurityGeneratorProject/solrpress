@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -22,23 +23,25 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private String id;
 
     @NotNull
-    @Size(min = 0, max = 50)
+    @Pattern(regexp = "^[a-z0-9]*$")
+    @Size(min = 1, max = 50)
     private String login;
 
     @JsonIgnore
-    @Size(min = 0, max = 100)
+    @NotNull
+    @Size(min = 6, max = 100)
     private String password;
 
-    @Size(min = 0, max = 50)
+    @Size(max = 50)
     @Field("first_name")
     private String firstName;
 
-    @Size(min = 0, max = 50)
+    @Size(max = 50)
     @Field("last_name")
     private String lastName;
 
     @Email
-    @Size(min = 0, max = 100)
+    @Size(max = 100)
     private String email;
 
     private boolean activated = false;
@@ -47,7 +50,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Field("lang_key")
     private String langKey;
 
-    @Size(min = 0, max = 20)
+    @Size(max = 20)
     @Field("activation_key")
     private String activationKey;
 

@@ -25,6 +25,8 @@ module.exports = function (config) {
             'main/webapp/bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js',
             'main/webapp/bower_components/angular-local-storage/dist/angular-local-storage.min.js',
             'main/webapp/bower_components/angular-cache-buster/angular-cache-buster.js',
+            'main/webapp/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js',
+            'main/webapp/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
             'main/webapp/bower_components/stomp-websocket/lib/stomp.js',
             'main/webapp/bower_components/sockjs-client/dist/sockjs.js',
             'main/webapp/scripts/app/app.js',
