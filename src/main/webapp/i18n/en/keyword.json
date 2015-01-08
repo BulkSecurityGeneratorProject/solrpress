@@ -1,0 +1,22 @@
+{
+    "solrpressApp": {
+        "keyword" : {
+            "home": {
+                "title": "Keywords",
+                "createLabel": "Create a new Keyword",
+                "createOrEditLabel": "Create or edit a Keyword"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Keyword {{ id }}?"
+            },
+            "detail": {
+                "title": "Keyword"
+            },
+            "label": "Label",
+            "score": "Score",
+            "network": "Network",
+            "timestamp": "Timestamp",
+            "info": "Info"
+        }
+    }
+}

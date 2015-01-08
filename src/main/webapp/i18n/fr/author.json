@@ -1,0 +1,36 @@
+{
+    "solrpressApp": {
+        "author" : {
+            "home": {
+                "title": "Authors",
+                "createLabel": "Créer un nouveau Author",
+                "createOrEditLabel": "Créer ou éditer un Author"
+            },
+            "detail": {
+                "title": "Author"
+            },
+            "name": "Name",
+            "birthDate": "BirthDate",
+            "gender": "Gender"
+        }
+    },
+    "entity": {
+        "action": {
+            "back": "Retour",
+            "cancel": "Annuler",
+            "edit": "Editer",
+            "delete": "Suppriner",
+            "save": "Sauvegarder",
+            "view": "Voir"
+        },
+        "detail": {
+            "field": "Champ",
+            "value": "Valeur"
+        },
+        "delete": {
+            "title": "Confirmation de suppression",
+            "question": "Etes-vous certain de vouloir supprimer le Author {{ id }} ?"
+        }
+    }
+}
+
