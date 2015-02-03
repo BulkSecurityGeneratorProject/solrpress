@@ -1,7 +1,11 @@
 angular.module('solrpressApp').controller 'TrackerController', ($scope, AuthServerProvider) ->
-  # This controller uses a Websocket connection to receive user activities in real-time.
+  showActivity = undefined
+  socket = undefined
+  stompClient = undefined
 
   showActivity = (activity) ->
+    existingActivity = undefined
+    index = undefined
     existingActivity = false
     index = 0
     while index < $scope.activities.length

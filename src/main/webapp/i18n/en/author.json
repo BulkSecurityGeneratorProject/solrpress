@@ -1,10 +1,13 @@
 {
     "solrpressApp": {
-        "author": {
+        "author" : {
             "home": {
                 "title": "Authors",
                 "createLabel": "Create a new Author",
                 "createOrEditLabel": "Create or edit a Author"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Author {{ id }}?"
             },
             "detail": {
                 "title": "Author"
@@ -12,24 +15,6 @@
             "name": "Name",
             "birthDate": "BirthDate",
             "gender": "Gender"
-        }
-    },
-    "entity": {
-        "action": {
-            "back": "Back",
-            "cancel": "Cancel",
-            "delete": "Delete",
-            "edit": "Edit",
-            "save": "Save",
-            "view": "View"
-        },
-        "detail": {
-            "field": "Field",
-            "value": "Value"
-        },
-        "delete": {
-            "title": "Confirm delete operation",
-            "question": "Are you sure you want to delete Author {{ id }}?"
         }
     }
 }

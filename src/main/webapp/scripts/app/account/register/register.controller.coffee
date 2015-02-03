@@ -21,7 +21,7 @@ angular.module('solrpressApp').controller 'RegisterController', ($scope, $transl
       Auth.createAccount($scope.registerAccount).then(->
         $scope.success = 'OK'
         return
-      ).catch (response) ->
+      )['catch'] (response) ->
         $scope.success = null
         if response.status == 400 and response.data == 'login already in use'
           $scope.errorUserExists = 'ERROR'

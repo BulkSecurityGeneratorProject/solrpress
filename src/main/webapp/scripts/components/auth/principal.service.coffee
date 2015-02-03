@@ -1,5 +1,7 @@
 'use strict'
 angular.module('solrpressApp').factory 'Principal', ($q, Account, Tracker) ->
+  _authenticated = undefined
+  _identity = undefined
   _identity = undefined
   _authenticated = false
   {
@@ -12,6 +14,7 @@ angular.module('solrpressApp').factory 'Principal', ($q, Account, Tracker) ->
         return false
       _identity.roles.indexOf(role) != -1
     isInAnyRole: (roles) ->
+      i = undefined
       if !_authenticated or !_identity.roles
         return false
       i = 0
@@ -25,22 +28,20 @@ angular.module('solrpressApp').factory 'Principal', ($q, Account, Tracker) ->
       _authenticated = identity != null
       return
     identity: (force) ->
+      deferred = undefined
       deferred = $q.defer()
       if force == true
         _identity = undefined
-      # check and see if we have retrieved the identity data from the server.
-      # if we have, reuse it by immediately resolving
       if angular.isDefined(_identity)
         deferred.resolve _identity
         return deferred.promise
-      # retrieve the identity data from the server, update the identity object, and then resolve.
       Account.get().$promise.then((account) ->
         _identity = account.data
         _authenticated = true
         deferred.resolve _identity
         Tracker.connect()
         return
-      ).catch ->
+      )['catch'] ->
         _identity = null
         _authenticated = false
         deferred.resolve _identity

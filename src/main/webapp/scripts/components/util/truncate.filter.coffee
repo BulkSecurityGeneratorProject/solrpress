@@ -1,6 +1,7 @@
 'use strict'
 angular.module('solrpressApp').filter('characters', ->
   (input, chars, breakOnWord) ->
+    lastspace = undefined
     if isNaN(chars)
       return input
     if chars <= 0
@@ -9,7 +10,6 @@ angular.module('solrpressApp').filter('characters', ->
       input = input.substring(0, chars)
       if !breakOnWord
         lastspace = input.lastIndexOf(' ')
-        # Get last space
         if lastspace != -1
           input = input.substr(0, lastspace)
       else
@@ -19,6 +19,7 @@ angular.module('solrpressApp').filter('characters', ->
     input
 ).filter 'words', ->
   (input, words) ->
+    inputWords = undefined
     if isNaN(words)
       return input
     if words <= 0

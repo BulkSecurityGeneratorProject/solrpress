@@ -2,6 +2,9 @@
 angular.module('solrpressApp').controller 'AuditsController', ($scope, $translate, $filter, AuditsService) ->
 
   $scope.onChangeDate = ->
+    dateFormat = undefined
+    fromDate = undefined
+    toDate = undefined
     dateFormat = 'yyyy-MM-dd'
     fromDate = $filter('date')($scope.fromDate, dateFormat)
     toDate = $filter('date')($scope.toDate, dateFormat)
@@ -10,15 +13,14 @@ angular.module('solrpressApp').controller 'AuditsController', ($scope, $translat
       return
     return
 
-  # Date picker configuration
-
   $scope.today = ->
-    # Today + 1 day - needed if the current day must be included
+    today = undefined
     today = new Date
     $scope.toDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1)
     return
 
   $scope.previousMonth = ->
+    fromDate = undefined
     fromDate = new Date
     if fromDate.getMonth() == 0
       fromDate = new Date(fromDate.getFullYear() - 1, 0, fromDate.getDate())

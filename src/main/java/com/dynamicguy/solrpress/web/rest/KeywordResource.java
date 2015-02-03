@@ -11,8 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * REST controller for managing Keyword.
@@ -57,13 +57,13 @@ public class KeywordResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Keyword> get(@PathVariable String id, HttpServletResponse response) {
+    public ResponseEntity<Keyword> get(@PathVariable String id) {
         log.debug("REST request to get Keyword : {}", id);
-        Keyword keyword = keywordRepository.findOne(id);
-        if (keyword == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(keyword, HttpStatus.OK);
+        return Optional.ofNullable(keywordRepository.findOne(id))
+            .map(keyword -> new ResponseEntity<>(
+                keyword,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     /**

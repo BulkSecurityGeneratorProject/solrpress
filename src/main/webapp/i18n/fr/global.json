@@ -6,6 +6,8 @@
             "home": "Accueil",
             "entities": {
                 "main": "Entités",
+                "keyword": "Keyword",
+                "author": "Author",
                 "additionalEntity": "JHipster will add addtional entities"
             },
             "account": {

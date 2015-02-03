@@ -1,18 +1,11 @@
 <div>
-    <div class="row">
-        <div class="col-md-6"><h2 translate="solrpressApp.keyword.home.title">Keyword</h2></div>
-        <div class="col-md-6">
-            <div class="pull-right">
-                <button class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#saveKeywordModal"
-                        ng-click="clear()">
-                    <span class="glyphicon glyphicon-flash"></span> <span
-                        translate="solrpressApp.keyword.home.createLabel">Create a new Keyword</span>
-                </button>
-            </div>
-        </div>
-    </div>
 
-    <div class="modal fade" id="saveKeywordModal" tabindex="-1" role="dialog" aria-labelledby="myKeywordLabel"
+    <h2 translate="solrpressApp.keyword.home.title">Keyword</h2>
+
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#saveKeywordModal" ng-click="clear()">
+        <span class="glyphicon glyphicon-flash"></span> <span translate="solrpressApp.keyword.home.createLabel">Create a new Keyword</span>
+    </button>
+    <div class="modal fade modal-primary" id="saveKeywordModal" tabindex="-1" role="dialog" aria-labelledby="myKeywordLabel"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -64,7 +57,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
                             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
-                                translate="entity.action.cancel">Cancel</span>
+                            translate="entity.action.cancel">Cancel</span>
                         </button>
                         <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">
                             <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
@@ -75,7 +68,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="deleteKeywordConfirmation">
+    <div class="modal modal-danger fade" id="deleteKeywordConfirmation">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form name="form" ng-submit="confirmDelete(keyword.id)">
@@ -91,11 +84,11 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
                             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
-                                translate="entity.action.cancel">Cancel</span>
+                            translate="entity.action.cancel">Cancel</span>
                         </button>
                         <button type="submit" ng-disabled="form.$invalid" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span
-                                translate="entity.action.delete">Delete</span>
+                            translate="entity.action.delete">Delete</span>
                         </button>
                     </div>
                 </form>
@@ -106,19 +99,19 @@
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
-            <tr>
-                <th>ID</th>
-                <th translate="solrpressApp.keyword.label">Label</th>
-                <th translate="solrpressApp.keyword.score">Score</th>
-                <th translate="solrpressApp.keyword.network">Network</th>
-                <th translate="solrpressApp.keyword.timestamp">Timestamp</th>
-                <th translate="solrpressApp.keyword.info">Info</th>
-                <th></th>
-            </tr>
+                <tr>
+                    <th>ID</th>
+                    <th translate="solrpressApp.keyword.label">Label</th>
+                    <th translate="solrpressApp.keyword.score">Score</th>
+                    <th translate="solrpressApp.keyword.network">Network</th>
+                    <th translate="solrpressApp.keyword.timestamp">Timestamp</th>
+                    <th translate="solrpressApp.keyword.info">Info</th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
             <tr ng-repeat="keyword in keywords">
-                <td><a ui-sref="keywordDetails({id:keyword.id})">{{keyword.id}}</a></td>
+                <td><a ui-sref="keywordDetail({id:keyword.id})">{{keyword.id}}</a></td>
                 <td>{{keyword.label}}</td>
                 <td>{{keyword.score}}</td>
                 <td>{{keyword.network}}</td>
@@ -134,13 +127,13 @@
                             ng-click="update(keyword.id)"
                             class="btn btn-primary">
                         <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span
-                            translate="entity.action.edit"> Edit</span>
+                        translate="entity.action.edit"> Edit</span>
                     </button>
                     <button type="submit"
                             ng-click="delete(keyword.id)"
                             class="btn btn-danger">
                         <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span
-                            translate="entity.action.delete"> Delete</span>
+                        translate="entity.action.delete"> Delete</span>
                     </button>
                 </td>
             </tr>

@@ -2,19 +2,18 @@
 angular.module('solrpressApp').factory 'Auth', ($rootScope, $state, $q, $translate, Principal, AuthServerProvider, Account, Register, Activate, Password, Tracker) ->
   {
     login: (credentials, callback) ->
+      cb = undefined
+      deferred = undefined
       cb = callback or angular.noop
       deferred = $q.defer()
       AuthServerProvider.login(credentials).then((data) ->
-        # retrieve the logged account information
         Principal.identity(true).then (account) ->
-          # After the login the language will be changed to
-          # the language selected by the user during his registration
           $translate.use account.langKey
           Tracker.sendActivity()
           return
         deferred.resolve data
         cb()
-      ).catch ((err) ->
+      )['catch'] ((err) ->
         @logout()
         deferred.reject err
         cb err
@@ -26,20 +25,18 @@ angular.module('solrpressApp').factory 'Auth', ($rootScope, $state, $q, $transla
       return
     authorize: ->
       Principal.identity().then ->
+        isAuthenticated = undefined
         isAuthenticated = Principal.isAuthenticated()
         if $rootScope.toState.data.roles and $rootScope.toState.data.roles.length > 0 and !Principal.isInAnyRole($rootScope.toState.data.roles)
           if isAuthenticated
-            # user is signed in but not authorized for desired state
             $state.go 'accessdenied'
           else
-            # user is not authenticated. stow the state they wanted before you
-            # send them to the signin state, so you can return them when you're done
             $rootScope.returnToState = $rootScope.toState
             $rootScope.returnToStateParams = $rootScope.toStateParams
-            # now, send them to the signin state so they can log in
             $state.go 'login'
         return
     createAccount: (account, callback) ->
+      cb = undefined
       cb = callback or angular.noop
       Register.save(account, (->
         cb account
@@ -48,6 +45,7 @@ angular.module('solrpressApp').factory 'Auth', ($rootScope, $state, $q, $transla
         cb err
       ).bind(this)).$promise
     updateAccount: (account, callback) ->
+      cb = undefined
       cb = callback or angular.noop
       Account.save(account, (->
         cb account
@@ -55,6 +53,7 @@ angular.module('solrpressApp').factory 'Auth', ($rootScope, $state, $q, $transla
         cb err
       ).bind(this)).$promise
     activateAccount: (key, callback) ->
+      cb = undefined
       cb = callback or angular.noop
       Activate.get(key, ((response) ->
         cb response
@@ -62,6 +61,7 @@ angular.module('solrpressApp').factory 'Auth', ($rootScope, $state, $q, $transla
         cb err
       ).bind(this)).$promise
     changePassword: (newPassword, callback) ->
+      cb = undefined
       cb = callback or angular.noop
       Password.save(newPassword, (->
         cb()

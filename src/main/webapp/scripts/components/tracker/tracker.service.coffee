@@ -1,5 +1,7 @@
 'use strict'
 angular.module('solrpressApp').factory 'Tracker', ($rootScope) ->
+  sendActivity = undefined
+  stompClient = undefined
   stompClient = null
 
   sendActivity = ->
@@ -8,6 +10,7 @@ angular.module('solrpressApp').factory 'Tracker', ($rootScope) ->
 
   {
     connect: ->
+      socket = undefined
       socket = new SockJS('/websocket/activity')
       stompClient = Stomp.over(socket)
       stompClient.connect {}, (frame) ->

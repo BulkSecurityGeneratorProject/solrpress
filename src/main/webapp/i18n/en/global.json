@@ -7,6 +7,7 @@
             "entities": {
                 "main": "Entities",
                 "keyword": "Keyword",
+                "author": "Author",
                 "additionalEntity": "JHipster will add addtional entities"
             },
             "account": {
@@ -84,7 +85,7 @@
             "value": "Value"
         },
         "delete": {
-            "title": "Confirm delete operation"
+            "title": "This action is irreversible. Please Confirm this delete operation."
         }
     },
     "footer": "Licensed under Apache 2.0 by Nurul Ferdous &mdash; <a target=\"_blank\" href=\"http://twitter.com/ferdous\">@ferdous</a>"

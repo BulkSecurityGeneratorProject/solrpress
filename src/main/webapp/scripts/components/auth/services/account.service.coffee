@@ -5,5 +5,4 @@ angular.module('solrpressApp').factory 'Account', ($resource) ->
     params: {}
     isArray: false
     interceptor: response: (response) ->
-      # expose response
       response

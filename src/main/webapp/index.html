@@ -35,9 +35,9 @@
     <![endif]-->
 
     <base href="/"/>
+    <meta name="fragment" content="!" />
     <title ng-bind-template="{{ title }} &mdash; SolrPress"></title>
     <meta charset="utf-8"/>
-    <meta name="fragment" content="!" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
@@ -47,12 +47,12 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css assets/styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.css"/>
-    <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/material.css"/>
-    <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.css"/>
-    <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css"/>
-    <link rel="stylesheet" href="bower_components/select2/select2.css"/>
-    <link rel="stylesheet" href="bower_components/highlightjs/styles/default.css"/>
+    <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/material.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.css" />
+    <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css" />
+    <link rel="stylesheet" href="bower_components/select2/select2.css" />
+    <link rel="stylesheet" href="bower_components/highlightjs/styles/default.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -189,6 +189,14 @@
 <script src="scripts/app/admin/tracker/tracker.js"></script>
 <script src="scripts/app/admin/tracker/tracker.controller.js"></script>
 <script src="scripts/components/tracker/tracker.service.js"></script>
+<script src="scripts/app/entities/keyword/keyword.js"></script>
+<script src="scripts/app/entities/keyword/keyword.controller.js"></script>
+<script src="scripts/app/entities/keyword/keyword-detail.controller.js"></script>
+<script src="scripts/components/entities/keyword/keyword.service.js"></script>
+<script src="scripts/app/entities/author/author.js"></script>
+<script src="scripts/app/entities/author/author.controller.js"></script>
+<script src="scripts/app/entities/author/author-detail.controller.js"></script>
+<script src="scripts/components/entities/author/author.service.js"></script>
 <!-- endbuild -->
 </body>
 </html>

@@ -19,13 +19,13 @@ angular.module('solrpressApp').controller 'MetricsController', ($scope, Monitori
     $scope.servicesStats = {}
     $scope.cachesStats = {}
     angular.forEach newValue.timers, (value, key) ->
+      index = undefined
+      newKey = undefined
       if key.indexOf('web.rest') != -1 or key.indexOf('service') != -1
         $scope.servicesStats[key] = value
       if key.indexOf('net.sf.ehcache.Cache') != -1
-        # remove gets or puts
         index = key.lastIndexOf('.')
         newKey = key.substr(0, index)
-        # Keep the name of the domain
         index = newKey.lastIndexOf('.')
         $scope.cachesStats[newKey] =
           'name': newKey.substr(index + 1)

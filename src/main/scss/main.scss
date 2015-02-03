@@ -5,6 +5,21 @@ $material-font-path: '../../bower_components/bootstrap-material-design/fonts/';
 @import "bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+//http://www.colourlovers.com/palette/3613071/W._Morris_wallpaper
+$primary: #008F24;
+$success: #53D700;
+$info: #00C1E4;
+$danger: #E3470E;
+$warning: lighten($danger, 70%);
+$notice: #F6F3D1;
+
+$brand-primary: $primary;
+$brand-success: $success;
+$brand-info: $info;
+$brand-warning: $warning;
+$brand-danger: $danger;
+
+
 @import "loader";
 @import "flash";
 @import "sidebar";

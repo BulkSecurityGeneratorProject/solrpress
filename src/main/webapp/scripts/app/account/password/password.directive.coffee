@@ -7,7 +7,8 @@ angular.module('solrpressApp').directive 'passwordStrengthBar', ->
     restrict: 'E'
     template: '<div id="strength">' + '<small translate="global.messages.validate.newpassword.strength">Password strength:</small>' + '<ul id="strengthBar">' + '<li class="point"></li><li class="point"></li><li class="point"></li><li class="point"></li><li class="point"></li>' + '</ul>' + '</div>'
     link: (scope, iElement, attr) ->
-      strength = 
+      strength = undefined
+      strength =
         colors: [
           '#F00'
           '#F90'
@@ -16,9 +17,16 @@ angular.module('solrpressApp').directive 'passwordStrengthBar', ->
           '#0F0'
         ]
         mesureStrength: (p) ->
+          _flags = undefined
+          _force = undefined
+          _lowerLetters = undefined
+          _numbers = undefined
+          _passedMatches = undefined
+          _regex = undefined
+          _symbols = undefined
+          _upperLetters = undefined
           _force = 0
           _regex = /[$-/:-?{-~!"^_`\[\]]/g
-          # "
           _lowerLetters = /[a-z]+/.test(p)
           _upperLetters = /[A-Z]+/.test(p)
           _numbers = /[0-9]+/.test(p)
@@ -34,14 +42,13 @@ angular.module('solrpressApp').directive 'passwordStrengthBar', ->
           ).length
           _force += 2 * p.length + (if p.length >= 10 then 1 else 0)
           _force += _passedMatches * 10
-          # penality (short password)
           _force = if p.length <= 6 then Math.min(_force, 10) else _force
-          # penality (poor variety of characters)
           _force = if _passedMatches == 1 then Math.min(_force, 10) else _force
           _force = if _passedMatches == 2 then Math.min(_force, 20) else _force
           _force = if _passedMatches == 3 then Math.min(_force, 40) else _force
           _force
         getColor: (s) ->
+          idx = undefined
           idx = 0
           if s <= 10
             idx = 0
@@ -58,6 +65,7 @@ angular.module('solrpressApp').directive 'passwordStrengthBar', ->
             col: @colors[idx]
           }
       scope.$watch attr.passwordToCheck, (password) ->
+        c = undefined
         if password
           c = strength.getColor(strength.mesureStrength(password))
           iElement.removeClass 'ng-hide'

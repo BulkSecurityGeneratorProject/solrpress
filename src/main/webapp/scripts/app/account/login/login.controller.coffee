@@ -15,7 +15,7 @@ angular.module('solrpressApp').controller 'LoginController', ($rootScope, $scope
       $scope.authenticationError = false
       $rootScope.back()
       return
-    ).catch ->
+    )['catch'] ->
       $scope.authenticationError = true
       return
     return

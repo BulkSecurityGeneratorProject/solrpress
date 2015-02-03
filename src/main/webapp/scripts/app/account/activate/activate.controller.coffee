@@ -4,7 +4,7 @@ angular.module('solrpressApp').controller 'ActivationController', ($scope, $stat
     $scope.error = null
     $scope.success = 'OK'
     return
-  ).catch ->
+  )['catch'] ->
     $scope.success = null
     $scope.error = 'ERROR'
     return
