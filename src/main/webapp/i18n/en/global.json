@@ -14,18 +14,21 @@
                 "settings": "Settings",
                 "password": "Password",
                 "sessions": "Sessions",
+                "login": "Authenticate",
+                "logout": "Log out",
+                "register": "Register"
+            },
+            "admin": {
+                "main": "Administration",
                 "tracker": "User tracker",
                 "metrics": "Metrics",
                 "health": "Health",
                 "configuration": "Configuration",
                 "logs": "Logs",
                 "audits": "Audits",
-                "login": "Authenticate",
-                "logout": "Log out",
                 "apidocs": "API",
-                "register": "Register"
+                "database": "Database"
             },
-            "admin": "Administration",
             "language": "Language"
         },
         "form": {
@@ -44,7 +47,7 @@
                 "register": "You don't have an account yet? <a href=\"#/register\">Register a new account</a>"
             },
             "error": {
-                "dontmatch" : "The password and its confirmation do not match!"
+                "dontmatch": "The password and its confirmation do not match!"
             },
             "validate": {
                 "newpassword": {
@@ -84,5 +87,5 @@
             "title": "Confirm delete operation"
         }
     },
-    "footer": "This is your footer"
+    "footer": "Licensed under Apache 2.0 by Nurul Ferdous &mdash; <a target=\"_blank\" href=\"http://twitter.com/ferdous\">@ferdous</a>"
 }

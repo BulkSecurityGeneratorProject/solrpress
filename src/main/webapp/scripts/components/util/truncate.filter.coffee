@@ -1,25 +1,30 @@
-"use strict"
-
-# Get last space
-angular.module("solrpressApp").filter("characters", ->
-    (input, chars, breakOnWord) ->
-        return input  if isNaN(chars)
-        return ""  if chars <= 0
-        if input and input.length > chars
-            input = input.substring(0, chars)
-            unless breakOnWord
-                lastspace = input.lastIndexOf(" ")
-                input = input.substr(0, lastspace)  if lastspace isnt -1
-            else
-                input = input.substr(0, input.length - 1)  while input.charAt(input.length - 1) is " "
-            return input + "..."
-        input
-).filter "words", ->
-    (input, words) ->
-        return input  if isNaN(words)
-        return ""  if words <= 0
-        if input
-            inputWords = input.split(/\s+/)
-            input = inputWords.slice(0, words).join(" ") + "..."  if inputWords.length > words
-        input
-
+'use strict'
+angular.module('solrpressApp').filter('characters', ->
+  (input, chars, breakOnWord) ->
+    if isNaN(chars)
+      return input
+    if chars <= 0
+      return ''
+    if input and input.length > chars
+      input = input.substring(0, chars)
+      if !breakOnWord
+        lastspace = input.lastIndexOf(' ')
+        # Get last space
+        if lastspace != -1
+          input = input.substr(0, lastspace)
+      else
+        while input.charAt(input.length - 1) == ' '
+          input = input.substr(0, input.length - 1)
+      return input + '...'
+    input
+).filter 'words', ->
+  (input, words) ->
+    if isNaN(words)
+      return input
+    if words <= 0
+      return ''
+    if input
+      inputWords = input.split(/\s+/)
+      if inputWords.length > words
+        input = inputWords.slice(0, words).join(' ') + '...'
+    input

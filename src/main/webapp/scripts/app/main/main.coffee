@@ -1,26 +1,21 @@
-"use strict"
+'use strict'
 
-angular.module("solrpressApp")
-
-.config ($stateProvider, USER_ROLES) ->
-  $stateProvider.state "home",
-    parent: "site"
-    url: "/"
+angular.module('solrpressApp').config ($stateProvider) ->
+  $stateProvider.state 'home',
+    parent: 'site'
+    url: '/'
     data:
-      roles: [USER_ROLES.all]
-
+      roles: []
     views:
-      "content@":
-        templateUrl: "scripts/app/main/main.html"
-        controller: "MainController"
-
+      'content@':
+        templateUrl: 'scripts/app/main/main.html'
+        controller: 'MainController'
     resolve:
       mainTranslatePartialLoader: [
-        "$translate"
-        "$translatePartialLoader"
+        '$translate'
+        '$translatePartialLoader'
         ($translate, $translatePartialLoader) ->
-          $translatePartialLoader.addPart "main"
-          return $translate.refresh()
+          $translatePartialLoader.addPart 'main'
+          $translate.refresh()
       ]
-
   return

@@ -1,8 +1,6 @@
-"use strict"
-angular.module("solrpressApp").config ($stateProvider) ->
-  $stateProvider.state "account",
+'use strict'
+angular.module('solrpressApp').config ($stateProvider) ->
+  $stateProvider.state 'account',
     abstract: true
-    parent: "site"
-
+    parent: 'site'
   return
-

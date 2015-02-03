@@ -30,4 +30,9 @@ metrics:
         port: 2003
         prefix: SolrPress
 
-
+cache:
+    timeToLiveSeconds: 3600
+    hazelcast:
+        debug: true
+        stickySession: false
+        backupCount: 1

@@ -37,7 +37,7 @@ authentication:
 swagger:
     title: SolrPress API
     description: SolrPress applications and beyond!
-    termsOfServiceUrl: http://jhipster.github.io/
+    termsOfServiceUrl: http://solrpress.github.io/
     contact:
     license: Apache 2.0
     licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.html

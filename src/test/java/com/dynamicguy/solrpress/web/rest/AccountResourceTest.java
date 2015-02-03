@@ -32,6 +32,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -77,7 +78,7 @@ public class AccountResourceTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        doNothing().when(mockMailService).sendActivationEmail((User) anyObject(), anyString());
+        doNothing().when(mockMailService).sendActivationEmail(anyObject(), anyString());
 
         AccountResource accountResource = new AccountResource();
         ReflectionTestUtils.setField(accountResource, "userRepository", userRepository);
@@ -104,11 +105,9 @@ public class AccountResourceTest {
     @Test
     public void testAuthenticatedUser() throws Exception {
         restUserMockMvc.perform(get("/api/authenticate")
-                .with(new RequestPostProcessor() {
-                    public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
-                        request.setRemoteUser("test");
-                        return request;
-                    }
+                .with(request -> {
+                    request.setRemoteUser("test");
+                    return request;
                 })
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -169,8 +168,8 @@ public class AccountResourceTest {
                 .content(TestUtil.convertObjectToJsonBytes(u)))
             .andExpect(status().isCreated());
 
-        User user = userRepository.findOneByLogin("joe");
-        assertThat(user).isNotNull();
+        Optional<User> user = userRepository.findOneByLogin("joe");
+        assertThat(user.isPresent()).isTrue();
     }
 
     @Test
@@ -192,8 +191,8 @@ public class AccountResourceTest {
                 .content(TestUtil.convertObjectToJsonBytes(u)))
             .andExpect(status().isBadRequest());
 
-        User user = userRepository.findOneByEmail("funky@example.com");
-        assertThat(user).isNull();
+        Optional<User> user = userRepository.findOneByEmail("funky@example.com");
+        assertThat(user.isPresent()).isFalse();
     }
 
     @Test
@@ -215,8 +214,8 @@ public class AccountResourceTest {
                 .content(TestUtil.convertObjectToJsonBytes(u)))
             .andExpect(status().isBadRequest());
 
-        User user = userRepository.findOneByLogin("bob");
-        assertThat(user).isNull();
+        Optional<User> user = userRepository.findOneByLogin("bob");
+        assertThat(user.isPresent()).isFalse();
     }
 
     @Test
@@ -251,8 +250,8 @@ public class AccountResourceTest {
                 .content(TestUtil.convertObjectToJsonBytes(dup)))
             .andExpect(status().is4xxClientError());
 
-        User userDup = userRepository.findOneByEmail("alicejr@example.com");
-        assertThat(userDup).isNull();
+        Optional<User> userDup = userRepository.findOneByEmail("alicejr@example.com");
+        assertThat(userDup.isPresent()).isFalse();
     }
 
     @Test
@@ -287,8 +286,8 @@ public class AccountResourceTest {
                 .content(TestUtil.convertObjectToJsonBytes(dup)))
             .andExpect(status().is4xxClientError());
 
-        User userDup = userRepository.findOneByLogin("johnjr");
-        assertThat(userDup).isNull();
+        Optional<User> userDup = userRepository.findOneByLogin("johnjr");
+        assertThat(userDup.isPresent()).isFalse();
     }
 
     @Test
@@ -310,9 +309,9 @@ public class AccountResourceTest {
                 .content(TestUtil.convertObjectToJsonBytes(u)))
             .andExpect(status().isCreated());
 
-        User userDup = userRepository.findOneByLogin("badguy");
-        assertThat(userDup).isNotNull();
-        assertThat(userDup.getAuthorities()).hasSize(1)
+        Optional<User> userDup = userRepository.findOneByLogin("badguy");
+        assertThat(userDup.isPresent()).isTrue();
+        assertThat(userDup.get().getAuthorities()).hasSize(1)
             .containsExactly(authorityRepository.findOne(AuthoritiesConstants.USER));
     }
 }

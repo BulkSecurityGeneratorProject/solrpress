@@ -1,12 +1,12 @@
 'use strict';
-
-angular.module('solrpressApp')
-    .controller('LogsController', function ($scope, LogsService) {
-        $scope.loggers = LogsService.findAll();
-
-        $scope.changeLevel = function (name, level) {
-            LogsService.changeLevel({name: name, level: level}, function () {
-                $scope.loggers = LogsService.findAll();
-            });
-        };
+angular.module('solrpressApp').controller('LogsController', function($scope, LogsService) {
+  $scope.loggers = LogsService.findAll();
+  $scope.changeLevel = function(name, level) {
+    LogsService.changeLevel({
+      name: name,
+      level: level
+    }, function() {
+      $scope.loggers = LogsService.findAll();
     });
+  };
+});

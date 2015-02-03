@@ -1,42 +1,26 @@
-"use strict"
-
-angular.module("solrpressApp").config ($stateProvider) ->
-    $stateProvider.state("error",
-        parent: "site"
-        url: "/error"
-        data:
-            roles: []
-
-        views:
-            "content@":
-                templateUrl: "scripts/app/error/error.html"
-
-        resolve:
-            mainTranslatePartialLoader: [
-                "$translate"
-                "$translatePartialLoader"
-                ($translate, $translatePartialLoader) ->
-                    $translatePartialLoader.addPart "error"
-                    return $translate.refresh()
-            ]
-    ).state "accessdenied",
-        parent: "site"
-        url: "/accessdenied"
-        data:
-            roles: []
-
-        views:
-            "content@":
-                templateUrl: "scripts/app/error/accessdenied.html"
-
-        resolve:
-            mainTranslatePartialLoader: [
-                "$translate"
-                "$translatePartialLoader"
-                ($translate, $translatePartialLoader) ->
-                    $translatePartialLoader.addPart "error"
-                    return $translate.refresh()
-            ]
-
-    return
-
+'use strict'
+angular.module('solrpressApp').config ($stateProvider) ->
+  $stateProvider.state('error',
+    parent: 'site'
+    url: '/error'
+    data: roles: []
+    views: 'content@': templateUrl: 'scripts/app/error/error.html'
+    resolve: mainTranslatePartialLoader: [
+      '$translate'
+      '$translatePartialLoader'
+      ($translate, $translatePartialLoader) ->
+        $translatePartialLoader.addPart 'error'
+        $translate.refresh()
+    ]).state 'accessdenied',
+    parent: 'site'
+    url: '/accessdenied'
+    data: roles: []
+    views: 'content@': templateUrl: 'scripts/app/error/accessdenied.html'
+    resolve: mainTranslatePartialLoader: [
+      '$translate'
+      '$translatePartialLoader'
+      ($translate, $translatePartialLoader) ->
+        $translatePartialLoader.addPart 'error'
+        $translate.refresh()
+    ]
+  return

@@ -6,7 +6,6 @@
             "home": "Accueil",
             "entities": {
                 "main": "Entités",
-                "keyword": "Keyword",
                 "additionalEntity": "JHipster will add addtional entities"
             },
             "account": {
@@ -14,18 +13,21 @@
                 "settings": "Profil",
                 "password": "Mot de passe",
                 "sessions": "Sessions",
+                "login": "S'authentifier",
+                "logout": "Déconnexion",
+                "register": "Créer un compte"
+            },
+            "admin": {
+                "main": "Administration",
                 "tracker": "Suivi des utilisateurs",
                 "metrics": "Métriques",
                 "health": "Diagnostics",
                 "configuration": "Configuration",
                 "logs": "Logs",
                 "audits": "Audits",
-                "login": "S'authentifier",
-                "logout": "Déconnexion",
                 "apidocs": "API",
-                "register": "Créer un compte"
+                "database": "Base de données"
             },
-            "admin": "Administration",
             "language": "Langue"
         },
         "form": {
@@ -84,5 +86,5 @@
             "title": "Confirmation de suppression"
         }
     },
-    "footer": "Ceci est votre pied de page"
+    "footer":"Licensed under Apache 2.0 by Nurul Ferdous &mdash; <a target=\"_blank\" href=\"http://twitter.com/ferdous\">@ferdous</a>"
 }
