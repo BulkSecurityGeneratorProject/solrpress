@@ -7469,9 +7469,7 @@ input.form-control:disabled, input.form-control:focus:disabled, input.form-contr
   left: 0;
   border: 0;
   z-index: 20;
-  background-image: url("../images/development_ribbon.png");
-  background-position: center center;
-  background-repeat: no-repeat;
+  background: url("../images/development_ribbon.png") no-repeat center center;
   opacity: .07;
 }
 
@@ -7511,7 +7509,7 @@ input.form-control:disabled, input.form-control:focus:disabled, input.form-contr
 
 .error {
   color: white;
-  background-color: red;
+  background-color: #ff0000;
 }
 
 .hipster {
@@ -7646,4 +7644,8 @@ ul#strength {
 
 .modal-danger .modal-header {
   background: #E3470E;
+}
+
+.alert a, .alert .alert-link {
+  color: #008F24;
 }

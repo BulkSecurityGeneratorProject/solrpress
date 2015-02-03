@@ -2,9 +2,10 @@
 
     <h2 translate="solrpressApp.keyword.home.title">Keyword</h2>
 
-    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#saveKeywordModal" ng-click="clear()">
+    <button class="btn btn-primary btn-raised" data-toggle="modal" data-target="#saveKeywordModal" ng-click="clear()">
         <span class="glyphicon glyphicon-flash"></span> <span translate="solrpressApp.keyword.home.createLabel">Create a new Keyword</span>
     </button>
+
     <div class="modal fade modal-primary" id="saveKeywordModal" tabindex="-1" role="dialog" aria-labelledby="myKeywordLabel"
          aria-hidden="true">
         <div class="modal-dialog">
@@ -99,7 +100,7 @@
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
-                <tr>
+                <tr class="info">
                     <th>ID</th>
                     <th translate="solrpressApp.keyword.label">Label</th>
                     <th translate="solrpressApp.keyword.score">Score</th>

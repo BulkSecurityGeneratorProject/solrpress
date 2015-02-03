@@ -5,7 +5,8 @@
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#saveAuthorModal" ng-click="clear()">
         <span class="glyphicon glyphicon-flash"></span> <span translate="solrpressApp.author.home.createLabel">Create a new Author</span>
     </button>
-    <div class="modal modal-primary fade" id="saveAuthorModal" tabindex="-1" role="dialog" aria-labelledby="myAuthorLabel"
+    <div class="modal modal-primary fade" id="saveAuthorModal" tabindex="-1" role="dialog"
+         aria-labelledby="myAuthorLabel"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -16,7 +17,8 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                                 ng-click="clear()">&times;</button>
-                        <h4 class="modal-title" id="myAuthorLabel" translate="solrpressApp.author.home.createOrEditLabel">Create or edit a Author</h4>
+                        <h4 class="modal-title" id="myAuthorLabel"
+                            translate="solrpressApp.author.home.createOrEditLabel">Create or edit a Author</h4>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
@@ -45,7 +47,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+                            translate="entity.action.cancel">Cancel</span>
                         </button>
                         <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">
                             <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
@@ -66,14 +69,17 @@
                         <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
                     </div>
                     <div class="modal-body">
-                        <p translate="solrpressApp.author.delete.question" translate-values="{id: '{{author.id}}'}">Are you sure you want to delete Author {{author.id}}?</p>
+                        <p translate="solrpressApp.author.delete.question" translate-values="{id: '{{author.id}}'}">Are
+                            you sure you want to delete Author {{author.id}}?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+                            translate="entity.action.cancel">Cancel</span>
                         </button>
                         <button type="submit" ng-disabled="form.$invalid" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete">Delete</span>
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span
+                            translate="entity.action.delete">Delete</span>
                         </button>
                     </div>
                 </form>
@@ -84,7 +90,7 @@
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
-                <tr>
+                <tr class="info">
                     <th>ID</th>
                     <th translate="solrpressApp.author.name">Name</th>
                     <th translate="solrpressApp.author.birthDate">BirthDate</th>
@@ -93,29 +99,31 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="author in authors">
-                    <td><a ui-sref="authorDetail({id:author.id})">{{author.id}}</a></td>
-                    <td>{{author.name}}</td>
-                    <td>{{author.birthDate}}</td>
-                    <td>{{author.gender}}</td>
-                    <td>
-                        <button type="submit"
-                                ui-sref="authorDetail({id:author.id})"
-                                class="btn btn-info">
-                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span translate="entity.action.view"> View</span>
-                        </button>
-                        <button type="submit"
-                                ng-click="update(author.id)"
-                                class="btn btn-primary">
-                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="entity.action.edit"> Edit</span>
-                        </button>
-                        <button type="submit"
-                                ng-click="delete(author.id)"
-                                class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete"> Delete</span>
-                        </button>
-                    </td>
-                </tr>
+            <tr ng-repeat="author in authors">
+                <td><a ui-sref="authorDetail({id:author.id})">{{author.id}}</a></td>
+                <td>{{author.name}}</td>
+                <td>{{author.birthDate}}</td>
+                <td>{{author.gender}}</td>
+                <td>
+                    <button type="submit"
+                            ui-sref="authorDetail({id:author.id})"
+                            class="btn btn-info">
+                        <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span translate="entity.action.view"> View</span>
+                    </button>
+                    <button type="submit"
+                            ng-click="update(author.id)"
+                            class="btn btn-primary">
+                        <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span
+                        translate="entity.action.edit"> Edit</span>
+                    </button>
+                    <button type="submit"
+                            ng-click="delete(author.id)"
+                            class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span
+                        translate="entity.action.delete"> Delete</span>
+                    </button>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>

@@ -51,9 +51,7 @@ input.form-control, .input-group-lg > .form-control, .input-group-lg > .input-gr
     left: 0;
     border: 0;
     z-index: 20;
-    background-image: url("../images/development_ribbon.png");
-    background-position: center center;
-    background-repeat: no-repeat;
+    background: url("../images/development_ribbon.png") no-repeat center center;
     opacity: .07;
 }
 
@@ -93,7 +91,7 @@ input.form-control, .input-group-lg > .form-control, .input-group-lg > .input-gr
 
 .error {
     color: white;
-    background-color: red;
+    background-color: #ff0000;
 }
 
 .hipster {
@@ -236,4 +234,8 @@ ul#strength {
 
 .modal-danger .modal-header {
     background: $brand-danger;
+}
+
+.alert a, .alert .alert-link {
+    color: $brand-primary;
 }
