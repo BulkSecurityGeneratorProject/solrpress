@@ -1,4 +1,5 @@
 'use strict'
+
 angular.module('solrpressApp').config ($stateProvider) ->
   $stateProvider.state 'home',
     parent: 'site'

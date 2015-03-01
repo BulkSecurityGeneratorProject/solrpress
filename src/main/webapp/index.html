@@ -6,78 +6,44 @@
 <!--[if IE 8]>
 <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js" lang="en" data-ng-hint data-ng-app="solrpressApp"><!--<![endif]-->
+<html class="no-js" lang="en" data-ng-app="solrpressApp"> <!--<![endif]-->
 <head>
-    <!--
-       IE8 support, see AngularJS Internet Explorer Compatibility http://docs.angularjs.org/guide/ie
-       For Firefox 3.6, you will also need to include jQuery and ECMAScript 5 shim
-   -->
-    <!--[if lt IE 9]>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.2.0/es5-shim.js"></script>
-    <script>
-        document.createElement('ui-select');
-        document.createElement('ui-select-match');
-        document.createElement('ui-select-choices');
-    </script>
-    <![endif]-->
-    <!--[if lte IE 8]>
-    <script>
-        document.createElement('ng-include');
-        document.createElement('ng-pluralize');
-        document.createElement('ng-view');
-
-        // Optionally these for CSS
-        document.createElement('ng:include');
-        document.createElement('ng:pluralize');
-        document.createElement('ng:view');
-    </script>
-    <![endif]-->
-
-    <base href="/"/>
-    <meta name="fragment" content="!" />
-    <title ng-bind-template="{{ title }} &mdash; SolrPress"></title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
-    <meta name="keywords" content=""/>
-    <meta name="description" content=""/>
-    <meta name="viewport" content="width=device-width"/>
-    <meta name="xsrf-token" content="my-token"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SolrPress</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css assets/styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.css" />
-    <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/material.css" />
-    <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.css" />
     <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css" />
     <link rel="stylesheet" href="bower_components/select2/select2.css" />
     <link rel="stylesheet" href="bower_components/highlightjs/styles/default.css" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <!-- endbower -->
     <!-- endbuild -->
-
     <!-- build:css assets/styles/main.css -->
-    <link rel="stylesheet" href="assets/styles/main.css"/>
+    <link rel="stylesheet" href="assets/styles/main.css">
     <!-- endbuild -->
 </head>
-<body>
+<body layout="column">
 <!--[if lt IE 10]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
 <![endif]-->
+
 <div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak=""></div>
 
-<div ui-view="navbar" ng-cloak=""></div>
+<md-toolbar class="md-theme-default" layout="row" ui-view="navbar" ng-cloak=""></md-toolbar>
 
-<div class="container">
-    <div ncy-breadcrumb></div>
-    <div class="well" ui-view="content"></div>
-
-    <div class="footer">
-        <p translate="footer">This is your footer</p>
+<section class="container">
+    <md-content class="md-padding md-whiteframe-z3" ui-view="content"></md-content>
+    <hr/>
+    <div class="footer md-padding" layout layout-align="center center">
+        <h6 translate="footer" class="md-padding">This is your footer</h6>
     </div>
-</div>
-<div data-ng-show="$root.loading" class="loading-indicator"></div>
+
+</section>
 
 <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
 <script>
@@ -99,11 +65,7 @@
 <script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
 <script src="bower_components/json3/lib/json3.js"></script>
 <script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-<script src="bower_components/angular-ui-utils/ui-utils.js"></script>
-<script src="bower_components/angular-ui-grid/ui-grid.js"></script>
-<script src="bower_components/angular-touch/angular-touch.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
 <script src="bower_components/angular-cookies/angular-cookies.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
@@ -111,26 +73,26 @@
 <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
 <script src="bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
 <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
-<script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
 <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
 <script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
 <script src="bower_components/moment/moment.js"></script>
-<script src="bower_components/lodash/dist/lodash.compat.js"></script>
+<script src="bower_components/lodash/lodash.js"></script>
 <script src="bower_components/d3/d3.js"></script>
 <script src="bower_components/ng-file-upload-shim/angular-file-upload-shim.js"></script>
 <script src="bower_components/angular-aria/angular-aria.js"></script>
 <script src="bower_components/hammerjs/hammer.js"></script>
-<script src="bower_components/bootstrap-material-design/dist/js/material.js"></script>
-<script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
 <script src="bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
 <script src="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
+<script src="bower_components/underscore.string/dist/underscore.string.js"></script>
 <script src="bower_components/select2/select2.js"></script>
 <script src="bower_components/angular-ui-select2/src/select2.js"></script>
 <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
 <script src="bower_components/angular-breadcrumb/release/angular-breadcrumb.js"></script>
 <script src="bower_components/angular-moment/angular-moment.js"></script>
 <script src="bower_components/highlightjs/highlight.pack.js"></script>
-<script src="bower_components/angular-highlightjs/angular-highlightjs.js"></script>
+<script src="bower_components/angular-highlightjs/build/angular-highlightjs.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -153,6 +115,7 @@
 <script src="scripts/components/admin/monitoring.service.js"></script>
 <script src="scripts/components/navbar/navbar.directive.js"></script>
 <script src="scripts/components/navbar/navbar.controller.js"></script>
+<script src="scripts/components/user/user.service.js"></script>
 <script src="scripts/components/util/truncate.filter.js"></script>
 <script src="scripts/components/util/base64.service.js"></script>
 <script src="scripts/app/account/account.js"></script>
@@ -185,7 +148,10 @@
 <script src="scripts/app/error/error.js"></script>
 <script src="scripts/app/main/main.js"></script>
 <script src="scripts/app/main/main.controller.js"></script>
-<script src="scripts/components/auth/provider/auth.oauth2.service.js"></script>
+<script src="scripts/components/auth/services/sessions.service.js"></script>
+<script src="scripts/components/auth/provider/auth.session.service.js"></script>
+<script src="scripts/app/account/sessions/sessions.js"></script>
+<script src="scripts/app/account/sessions/sessions.controller.js"></script>
 <script src="scripts/app/admin/tracker/tracker.js"></script>
 <script src="scripts/app/admin/tracker/tracker.controller.js"></script>
 <script src="scripts/components/tracker/tracker.service.js"></script>
@@ -193,10 +159,6 @@
 <script src="scripts/app/entities/keyword/keyword.controller.js"></script>
 <script src="scripts/app/entities/keyword/keyword-detail.controller.js"></script>
 <script src="scripts/components/entities/keyword/keyword.service.js"></script>
-<script src="scripts/app/entities/author/author.js"></script>
-<script src="scripts/app/entities/author/author.controller.js"></script>
-<script src="scripts/app/entities/author/author-detail.controller.js"></script>
-<script src="scripts/components/entities/author/author.service.js"></script>
 <!-- endbuild -->
 </body>
 </html>

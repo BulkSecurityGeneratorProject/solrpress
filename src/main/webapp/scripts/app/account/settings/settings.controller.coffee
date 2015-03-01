@@ -14,7 +14,7 @@ angular.module('solrpressApp').controller 'SettingsController', ($scope, Princip
         $scope.settingsAccount = account
         return
       return
-    )['catch'] ->
+    ).catch ->
       $scope.success = null
       $scope.error = 'ERROR'
       return

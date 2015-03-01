@@ -13,9 +13,12 @@ angular.module('solrpressApp').controller 'LoginController', ($rootScope, $scope
       password: $scope.password
       rememberMe: $scope.rememberMe).then(->
       $scope.authenticationError = false
-      $rootScope.back()
+      if $rootScope.previousStateName == 'register'
+        $state.go 'home'
+      else
+        $rootScope.back()
       return
-    )['catch'] ->
+    ).catch ->
       $scope.authenticationError = true
       return
     return

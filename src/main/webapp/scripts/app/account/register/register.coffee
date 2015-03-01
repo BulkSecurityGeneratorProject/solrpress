@@ -3,7 +3,9 @@ angular.module('solrpressApp').config ($stateProvider) ->
   $stateProvider.state 'register',
     parent: 'account'
     url: '/register'
-    data: roles: []
+    data:
+      roles: []
+      pageTitle: 'register.title'
     views: 'content@':
       templateUrl: 'scripts/app/account/register/register.html'
       controller: 'RegisterController'

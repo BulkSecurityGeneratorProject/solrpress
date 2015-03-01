@@ -5,12 +5,15 @@ import com.dynamicguy.solrpress.domain.Keyword;
 import com.dynamicguy.solrpress.repository.KeywordRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,9 +36,29 @@ public class KeywordResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public void create(@RequestBody Keyword keyword) {
+    public ResponseEntity<Void> create(@RequestBody Keyword keyword) throws URISyntaxException {
         log.debug("REST request to save Keyword : {}", keyword);
+        if (keyword.getId() != null) {
+            return ResponseEntity.badRequest().header("Failure", "A new keyword cannot already have an ID").build();
+        }
         keywordRepository.save(keyword);
+        return ResponseEntity.created(new URI("/api/keywords/" + keyword.getId())).build();
+    }
+
+    /**
+     * PUT  /keywords -> Updates an existing keyword.
+     */
+    @RequestMapping(value = "/keywords",
+        method = RequestMethod.PUT,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Void> update(@RequestBody Keyword keyword) throws URISyntaxException {
+        log.debug("REST request to update Keyword : {}", keyword);
+        if (keyword.getId() == null) {
+            return create(keyword);
+        }
+        keywordRepository.save(keyword);
+        return ResponseEntity.ok().build();
     }
 
     /**

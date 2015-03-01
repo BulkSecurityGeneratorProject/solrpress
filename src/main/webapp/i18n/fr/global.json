@@ -7,7 +7,6 @@
             "entities": {
                 "main": "Entités",
                 "keyword": "Keyword",
-                "author": "Author",
                 "additionalEntity": "JHipster will add addtional entities"
             },
             "account": {
@@ -76,7 +75,7 @@
             "back": "Retour",
             "cancel": "Annuler",
             "edit": "Editer",
-            "delete": "Suppriner",
+            "delete": "Supprimer",
             "save": "Sauvegarder",
             "view": "Voir"
         },
@@ -88,5 +87,5 @@
             "title": "Confirmation de suppression"
         }
     },
-    "footer":"Licensed under Apache 2.0 by Nurul Ferdous &mdash; <a target=\"_blank\" href=\"http://twitter.com/ferdous\">@ferdous</a>"
+    "footer": "Ceci est votre pied de page"
 }

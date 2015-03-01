@@ -1,7 +1,6 @@
 package com.dynamicguy.solrpress.config;
 
 import com.mongodb.Mongo;
-import com.dynamicguy.solrpress.config.oauth2.OAuth2AuthenticationReadConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -37,14 +36,6 @@ public class CloudMongoDbConfiguration extends AbstractMongoConfiguration  {
     @Bean
     public LocalValidatorFactoryBean validator() {
         return new LocalValidatorFactoryBean();
-    }
-
-    @Bean
-    public CustomConversions customConversions() {
-        List<Converter<?, ?>> converterList = new ArrayList<>();
-        OAuth2AuthenticationReadConverter converter = new OAuth2AuthenticationReadConverter();
-        converterList.add(converter);
-        return new CustomConversions(converterList);
     }
 
     @Override

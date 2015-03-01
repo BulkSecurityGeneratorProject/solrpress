@@ -7,7 +7,6 @@
             "entities": {
                 "main": "Entities",
                 "keyword": "Keyword",
-                "author": "Author",
                 "additionalEntity": "JHipster will add addtional entities"
             },
             "account": {
@@ -48,7 +47,7 @@
                 "register": "You don't have an account yet? <a href=\"#/register\">Register a new account</a>"
             },
             "error": {
-                "dontmatch": "The password and its confirmation do not match!"
+                "dontmatch" : "The password and its confirmation do not match!"
             },
             "validate": {
                 "newpassword": {
@@ -85,8 +84,8 @@
             "value": "Value"
         },
         "delete": {
-            "title": "This action is irreversible. Please Confirm this delete operation."
+            "title": "Confirm delete operation"
         }
     },
-    "footer": "Licensed under Apache 2.0 by Nurul Ferdous &mdash; <a target=\"_blank\" href=\"http://twitter.com/ferdous\">@ferdous</a>"
+    "footer": "This is your footer"
 }

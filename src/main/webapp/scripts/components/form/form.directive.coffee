@@ -1,3 +1,5 @@
+### globals $ ###
+
 'use strict'
 angular.module('solrpressApp').directive 'showValidation', ->
   {
@@ -5,16 +7,10 @@ angular.module('solrpressApp').directive 'showValidation', ->
     require: 'form'
     link: (scope, element) ->
       element.find('.form-group').each ->
-        $formGroup = undefined
-        $inputs = undefined
-        $formGroup = undefined
-        $inputs = undefined
         $formGroup = $(this)
         $inputs = $formGroup.find('input[ng-model],textarea[ng-model],select[ng-model]')
         if $inputs.length > 0
           $inputs.each ->
-            $input = undefined
-            $input = undefined
             $input = $(this)
             scope.$watch (->
               $input.hasClass('ng-invalid') and $input.hasClass('ng-dirty')

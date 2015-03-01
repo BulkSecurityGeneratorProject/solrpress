@@ -1,20 +1,10 @@
-###jshint bitwise: false ###
+###jshint bitwise: false###
 
 'use strict'
 angular.module('solrpressApp').service('Base64', ->
-  keyStr = undefined
   keyStr = 'ABCDEFGHIJKLMNOP' + 'QRSTUVWXYZabcdef' + 'ghijklmnopqrstuv' + 'wxyz0123456789+/' + '='
 
   @encode = (input) ->
-    chr1 = undefined
-    chr2 = undefined
-    chr3 = undefined
-    enc1 = undefined
-    enc2 = undefined
-    enc3 = undefined
-    enc4 = undefined
-    i = undefined
-    output = undefined
     output = ''
     chr1 = undefined
     chr2 = undefined
@@ -42,15 +32,6 @@ angular.module('solrpressApp').service('Base64', ->
     output
 
   @decode = (input) ->
-    chr1 = undefined
-    chr2 = undefined
-    chr3 = undefined
-    enc1 = undefined
-    enc2 = undefined
-    enc3 = undefined
-    enc4 = undefined
-    i = undefined
-    output = undefined
     output = ''
     chr1 = undefined
     chr2 = undefined
@@ -60,6 +41,7 @@ angular.module('solrpressApp').service('Base64', ->
     enc3 = undefined
     enc4 = ''
     i = 0
+    # remove all characters that are not A-Z, a-z, 0-9, +, /, or =
     input = input.replace(/[^A-Za-z0-9\+\/\=]/g, '')
     while i < input.length
       enc1 = keyStr.indexOf(input.charAt(i++))

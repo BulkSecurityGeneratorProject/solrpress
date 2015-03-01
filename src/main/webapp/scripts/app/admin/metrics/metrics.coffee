@@ -3,7 +3,9 @@ angular.module('solrpressApp').config ($stateProvider) ->
   $stateProvider.state 'metrics',
     parent: 'admin'
     url: '/metrics'
-    data: roles: [ 'ROLE_ADMIN' ]
+    data:
+      roles: [ 'ROLE_ADMIN' ]
+      pageTitle: 'metrics.title'
     views: 'content@':
       templateUrl: 'scripts/app/admin/metrics/metrics.html'
       controller: 'MetricsController'

@@ -3,7 +3,7 @@
     "baseName": "SolrPress",
     "packageName": "com.dynamicguy.solrpress",
     "packageFolder": "com/dynamicguy/solrpress",
-    "authenticationType": "oauth2",
+    "authenticationType": "session",
     "hibernateCache": "no",
     "clusteredHttpSession": "hazelcast",
     "websocket": "spring-websocket",
@@ -13,6 +13,7 @@
     "useCompass": true,
     "buildTool": "maven",
     "frontendBuilder": "gulp",
-    "javaVersion": "8"
+    "javaVersion": "8",
+    "rememberMeKey": "542f0734041d8b55f1eb671016d77adc0e8754f0"
   }
 }

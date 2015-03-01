@@ -1,4 +1,5 @@
 'use strict'
+
 angular.module('solrpressApp', [
     'LocalStorageModule'
     'tmh.dynamicLocale'
@@ -7,39 +8,35 @@ angular.module('solrpressApp', [
     'ngCookies'
     'pascalprecht.translate'
     'ngCacheBuster'
-    'ngTouch'
-    'ngAria'
-    'ngSanitize'
-    'ui.grid'
-    'ui.grid.paging'
-    'ui.grid.resizeColumns'
-    'ui.grid.pinning'
-    'ui.grid.selection'
-    'ui.grid.moveColumns'
-    'ui.utils'
-    'ui.bootstrap'
-    'angularMoment'
-    'angularFileUpload'
-    'ncy-angular-breadcrumb'
-]).run(($rootScope, $location, $http, $state, $translate, Auth, Principal, Language, ENV, VERSION) ->
+    'ngMaterial'
+]).run(($rootScope, $location, $window, $http, $state, $translate, Auth, Principal, Language, ENV, VERSION) ->
     $rootScope.ENV = ENV
     $rootScope.VERSION = VERSION
     $rootScope.$on '$stateChangeStart', (event, toState, toStateParams) ->
         $rootScope.toState = toState
         $rootScope.toStateParams = toStateParams
-        $rootScope.title = toState.title or toState.name
         if Principal.isIdentityResolved()
             Auth.authorize()
+        # Update the language
         Language.getCurrent().then (language) ->
             $translate.use language
             return
         return
     $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
+        titleKey = 'global.title'
         $rootScope.previousStateName = fromState.name
         $rootScope.previousStateParams = fromParams
+        # Set the page title key to the one configured in state or use default one
+        if toState.data.pageTitle
+            titleKey = toState.data.pageTitle
+        $translate(titleKey).then (title) ->
+            # Change window title with translated one
+            $window.document.title = title
+            return
         return
 
     $rootScope.back = ->
+        # If previous state is 'activate' or do not exist go to 'home'
         if $rootScope.previousStateName == 'activate' or $state.get($rootScope.previousStateName) == null
             $state.go 'home'
         else
@@ -47,59 +44,21 @@ angular.module('solrpressApp', [
         return
 
     return
-).factory('authInterceptor', ($rootScope, $q, $location, localStorageService) ->
-    { request: (config) ->
-        token = undefined
-        config.headers = config.headers or {}
-        token = localStorageService.get('token')
-        if token and token.expires_at and token.expires_at > (new Date).getTime()
-            config.headers.Authorization = 'Bearer ' + token.access_token
-        config
-    }
-).factory('loadingInterceptor', ($rootScope, $q, $cookieStore) ->
-    $rootScope.loading = 0
-    {
-    request: (config) ->
-        $rootScope.loading++
-        config.headers = config.headers or {}
-        if $cookieStore.get('token')
-            config.headers.Authorization = 'Bearer ' + $cookieStore.get('token')
-        config
-    response: (response) ->
-        $rootScope.loading--
-        response
-    responseError: (response) ->
-        $rootScope.loading--
-        $q.reject response
+).config ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $translateProvider, tmhDynamicLocaleProvider, httpRequestInterceptorCacheBusterProvider, $mdThemingProvider) ->
 
-    }
-).config ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $translateProvider, tmhDynamicLocaleProvider, httpRequestInterceptorCacheBusterProvider, $breadcrumbProvider) ->
-    $locationProvider.html5Mode(false)
-    $locationProvider.hashPrefix('!')
-    $.material.init()
-    $httpProvider.defaults.xsrfCookieName = 'XSRF-TOKEN'
-    $httpProvider.defaults.xsrfHeaderName = 'X-XSRF-TOKEN'
-    defaultHeaders =
-        'Content-Type': 'application/json'
-        'Accept-Language': 'en'
-        'X-Requested-With': 'XMLHttpRequest'
-    $httpProvider.defaults.headers.delete = defaultHeaders
-    $httpProvider.defaults.headers.patch = defaultHeaders
-    $httpProvider.defaults.headers.post = defaultHeaders
-    $httpProvider.defaults.headers.put = defaultHeaders
-    $httpProvider.defaults.headers.get = defaultHeaders
+    $mdThemingProvider.theme('default')
+    .primaryPalette('pink')
+    .accentPalette('orange')
 
-    $breadcrumbProvider.setOptions
-        prefixStateName: 'home'
-        template: 'bootstrap3'
-
+    #enable CSRF
+    $httpProvider.defaults.xsrfCookieName = 'CSRF-TOKEN'
+    $httpProvider.defaults.xsrfHeaderName = 'X-CSRF-TOKEN'
+    #Cache everything except rest api requests
     httpRequestInterceptorCacheBusterProvider.setMatchlist [
         /.*api.*/
         /.*protected.*/
     ], true
-
     $urlRouterProvider.otherwise '/'
-
     $stateProvider.state 'site',
         'abstract': true
         views:
@@ -120,9 +79,7 @@ angular.module('solrpressApp', [
                     $translatePartialLoader.addPart 'language'
                     $translate.refresh()
             ]
-    $httpProvider.interceptors.push 'loadingInterceptor'
-    $httpProvider.interceptors.push 'authInterceptor'
-
+    # Initialize angular-translate
     $translateProvider.useLoader '$translatePartialLoader', urlTemplate: 'i18n/{lang}/{part}.json'
     $translateProvider.preferredLanguage 'en'
     $translateProvider.useCookieStorage()

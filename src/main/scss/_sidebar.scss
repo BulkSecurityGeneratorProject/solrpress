@@ -1,163 +1,75 @@
-/* All the default sidebar styles */
-/* toggle button settings */
-/* Note: this disables the navbar-toggle class's hide function. set visibility with the boostrap visible/hidden classes */
-/* Note: this also disables the navbar-header class positioning settings in small screens. */
-.navbar.navbar-static .navbar-header {
-    float: left;
+md-icon {
+    width:50%;height:50%
 }
 
-.navbar .navbar-toggle.toggle-left {
-    float: left;
-    margin-left: 15px;
+md-icon svg {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
 }
 
-.navbar .navbar-toggle.toggle-right {
-    float: right;
-    margin-right: 15px;
+.s64 {
+    font-size:64px;
 }
 
-.navbar .navbar-toggle.toggle-sidebar, [data-toggle="sidebar"] {
-    display: block;
+.s32 {
+
+    font-size:48px;
+
 }
 
-/* sidebar settings */
-.sidebar {
-    position: fixed;
-    display: block;
-    top: 51px;
-    bottom: 0;
-    z-index: 1000;
-    min-height: 100%;
-    max-height: none;
-    overflow: auto;
+md-icon.fa {
+    display:block;
+    padding-left:0px;
 }
 
-.sidebar-left {
-    left: 0;
+md-icon.s32 span {
+    padding-left:8px;
 }
 
-.sidebar-right {
-    right: 0;
+md-grid-list {
+    margin: 8px; }
+.gray {
+    background: #f5f5f5; }
+.green {
+    background: #b9f6ca; }
+.yellow {
+    background: #ffff8d; }
+.blue {
+    background: #84ffff; }
+.darkBlue {
+    background: #80d8ff; }
+.deepBlue {
+    background: #448aff; }
+.purple {
+    background: #b388ff; }
+.lightPurple {
+    background: #8c9eff; }
+.red {
+    background: #ff8a80; }
+.pink {
+    background: #ff80ab; }
+
+md-grid-tile {
+    -webkit-transition: all 500ms ease-out 100ms;
+    -moz-transition: all 500ms ease-out 100ms;
+    -o-transition: all 500ms ease-out 100ms;
+    transition: all 500ms ease-out 100ms;
 }
 
-/* css to override hiding the sidebar according to different screen sizes */
-.row .sidebar.sidebar-left.sidebar-xs-show {
-    left: 0;
-    -webkit-transform: translate(0,0);
-    -ms-transform: translate(0,0);
-    -o-transform: translate(0,0);
-    -moz-transform: translate(0,0);
-    transform: translate(0,0);
+md-grid-tile md-grid-tile-footer {
+    background:  rgba(0,0,0,.68);
+    height: 36px;
+
 }
 
-/*right sidebar is untested */
-.row .sidebar.sidebar-right.sidebar-xs-show {
-    right: 0;
-    -webkit-transform: translate(0,0);
-    -ms-transform: translate(0,0);
-    -o-transform: translate(0,0);
-    -moz-transform: translate(0,0);
-    transform: translate(0,0);
+md-grid-tile-footer figcaption  {
+    width:100%;
 }
 
-@media (min-width: 768px) {
-    .row .sidebar.sidebar-left.sidebar-sm-show {
-        left: 0;
-        -webkit-transform: translate(0,0);
-        -ms-transform: translate(0,0);
-        -o-transform: translate(0,0);
-        -moz-transform: translate(0,0);
-        transform: translate(0,0);
-    }
-
-    /*right sidebar is untested */
-    .row .sidebar.sidebar-right.sidebar-sm-show {
-        right: 0;
-        -webkit-transform: translate(0,0);
-        -ms-transform: translate(0,0);
-        -o-transform: translate(0,0);
-        -moz-transform: translate(0,0);
-        transform: translate(0,0);
-    }
+md-grid-tile-footer figcaption h3 {
+    margin:0px;
+    font-weight:700;
+    width:100%;
+    text-align:center;
 }
-
-@media (min-width: 992px) {
-    .row .sidebar.sidebar-left.sidebar-md-show {
-        left: 0;
-        -webkit-transform: translate(0,0);
-        -ms-transform: translate(0,0);
-        -o-transform: translate(0,0);
-        -moz-transform: translate(0,0);
-        transform: translate(0,0);
-    }
-
-    .row .sidebar.sidebar-right.sidebar-md-show {
-        right: 0;
-        -webkit-transform: translate(0,0);
-        -ms-transform: translate(0,0);
-        -o-transform: translate(0,0);
-        -moz-transform: translate(0,0);
-        transform: translate(0,0);
-    }
-}
-
-@media (min-width: 1170px) {
-    .row .sidebar.sidebar-left.sidebar-lg-show {
-        left: 0;
-        -webkit-transform: translate(0,0);
-        -moz-transform: translate(0,0);
-        -ms-transform: translate(0,0);
-        -o-transform: translate(0,0);
-        transform: translate(0,0);
-    }
-
-    .row .sidebar.sidebar-right.sidebar-lg-show {
-        right: 0;
-        -webkit-transform: translate(0,0);
-        -moz-transform: translate(0,0);
-        -ms-transform: translate(0,0);
-        -o-transform: translate(0,0);
-        transform: translate(0,0);
-    }
-}
-
-/* animation class - optional: without it the sidebar would just pop in and out*/
-.sidebar-animate {
-    -webkit-transition: -webkit-transform 300ms ease;
-    -moz-transition: -moz-transform 300ms ease;
-    -o-transition: transform 300ms ease;
-    transition: transform 300ms ease;
-}
-
-/* Left panel positioning classes */
-.sidebar.sidebar-left {
-    -webkit-transform: translate(-100%,0);
-    -moz-transform: translate(-100%,0);
-    -ms-transform: translate(-100%,0);
-    -o-transform: translate(-100%,0);
-    transform: translate(-100%,0);
-}
-
-    .sidebar.sidebar-left.sidebar-open {
-        -webkit-transform: translate(0,0);
-        -moz-transform: translate(0,0);
-        -ms-transform: translate(0,0);
-        -o-transform: translate(0,0);
-        transform: translate(0,0);
-    }
-
-.sidebar.sidebar-right {
-    -webkit-transform: translate(100%,0);
-    -moz-transform: translate(100%,0);
-    -ms-transform: translate(100%,0);
-    -o-transform: translate(100%,0);
-    transform: translate(100%,0);
-}
-
-    .sidebar.sidebar-right.sidebar-open {
-        -webkit-transform: translate(0,0);
-        -moz-transform: translate(0,0);
-        -ms-transform: translate(0,0);
-        -o-transform: translate(0,0);
-        transform: translate(0,0);
-    }

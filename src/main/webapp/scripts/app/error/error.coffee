@@ -3,7 +3,9 @@ angular.module('solrpressApp').config ($stateProvider) ->
   $stateProvider.state('error',
     parent: 'site'
     url: '/error'
-    data: roles: []
+    data:
+      roles: []
+      pageTitle: 'errors.title'
     views: 'content@': templateUrl: 'scripts/app/error/error.html'
     resolve: mainTranslatePartialLoader: [
       '$translate'

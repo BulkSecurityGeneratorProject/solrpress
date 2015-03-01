@@ -6,7 +6,7 @@ security.basic.enabled: false
 endpoints.jolokia.enabled: false
 
 # security configuration (this key should be unique for your application, and kept secret)
-jhipster.security.rememberme.key: SolrPress
+jhipster.security.rememberme.key: 542f0734041d8b55f1eb671016d77adc0e8754f0
 
 async:
     corePoolSize: 2
@@ -27,17 +27,10 @@ spring:
     messageSource:
         cacheSeconds: 1
 
-authentication:
-    oauth:
-        clientid: SolrPressapp
-        secret: mySecretOAuthSecret
-        # Token is valid 30 minutes
-        tokenValidityInSeconds: 1800
-
 swagger:
     title: SolrPress API
     description: SolrPress applications and beyond!
-    termsOfServiceUrl: http://solrpress.github.io/
+    termsOfServiceUrl: http://jhipster.github.io/
     contact:
     license: Apache 2.0
     licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.html

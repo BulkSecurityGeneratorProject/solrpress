@@ -1,5 +1,9 @@
 package com.dynamicguy.solrpress.web.rest;
 
+import com.dynamicguy.solrpress.Application;
+import com.dynamicguy.solrpress.domain.Keyword;
+import com.dynamicguy.solrpress.repository.KeywordRepository;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,10 +23,6 @@ import org.joda.time.LocalDate;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.dynamicguy.solrpress.Application;
-import com.dynamicguy.solrpress.domain.Keyword;
-import com.dynamicguy.solrpress.repository.KeywordRepository;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -40,6 +40,8 @@ public class KeywordResourceTest {
 
     private static final String DEFAULT_LABEL = "SAMPLE_TEXT";
     private static final String UPDATED_LABEL = "UPDATED_TEXT";
+    private static final String DEFAULT_KEYWORD = "SAMPLE_TEXT";
+    private static final String UPDATED_KEYWORD = "UPDATED_TEXT";
 
     private static final BigDecimal DEFAULT_SCORE = BigDecimal.ZERO;
     private static final BigDecimal UPDATED_SCORE = BigDecimal.ONE;
@@ -71,6 +73,7 @@ public class KeywordResourceTest {
         keywordRepository.deleteAll();
         keyword = new Keyword();
         keyword.setLabel(DEFAULT_LABEL);
+        keyword.setKeyword(DEFAULT_KEYWORD);
         keyword.setScore(DEFAULT_SCORE);
         keyword.setNetwork(DEFAULT_NETWORK);
         keyword.setTimestamp(DEFAULT_TIMESTAMP);
@@ -86,13 +89,14 @@ public class KeywordResourceTest {
         restKeywordMockMvc.perform(post("/api/keywords")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(keyword)))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
 
         // Validate the Keyword in the database
         List<Keyword> keywords = keywordRepository.findAll();
         assertThat(keywords).hasSize(1);
         Keyword testKeyword = keywords.iterator().next();
         assertThat(testKeyword.getLabel()).isEqualTo(DEFAULT_LABEL);
+        assertThat(testKeyword.getKeyword()).isEqualTo(DEFAULT_KEYWORD);
         assertThat(testKeyword.getScore()).isEqualTo(DEFAULT_SCORE);
         assertThat(testKeyword.getNetwork()).isEqualTo(DEFAULT_NETWORK);
         assertThat(testKeyword.getTimestamp()).isEqualTo(DEFAULT_TIMESTAMP);
@@ -110,6 +114,7 @@ public class KeywordResourceTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[0].id").value(keyword.getId()))
                 .andExpect(jsonPath("$.[0].label").value(DEFAULT_LABEL.toString()))
+                .andExpect(jsonPath("$.[0].keyword").value(DEFAULT_KEYWORD.toString()))
                 .andExpect(jsonPath("$.[0].score").value(DEFAULT_SCORE.intValue()))
                 .andExpect(jsonPath("$.[0].network").value(DEFAULT_NETWORK.toString()))
                 .andExpect(jsonPath("$.[0].timestamp").value(DEFAULT_TIMESTAMP.toString()))
@@ -127,6 +132,7 @@ public class KeywordResourceTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(keyword.getId()))
             .andExpect(jsonPath("$.label").value(DEFAULT_LABEL.toString()))
+            .andExpect(jsonPath("$.keyword").value(DEFAULT_KEYWORD.toString()))
             .andExpect(jsonPath("$.score").value(DEFAULT_SCORE.intValue()))
             .andExpect(jsonPath("$.network").value(DEFAULT_NETWORK.toString()))
             .andExpect(jsonPath("$.timestamp").value(DEFAULT_TIMESTAMP.toString()))
@@ -147,11 +153,12 @@ public class KeywordResourceTest {
 
         // Update the keyword
         keyword.setLabel(UPDATED_LABEL);
+        keyword.setKeyword(UPDATED_KEYWORD);
         keyword.setScore(UPDATED_SCORE);
         keyword.setNetwork(UPDATED_NETWORK);
         keyword.setTimestamp(UPDATED_TIMESTAMP);
         keyword.setInfo(UPDATED_INFO);
-        restKeywordMockMvc.perform(post("/api/keywords")
+        restKeywordMockMvc.perform(put("/api/keywords")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(keyword)))
                 .andExpect(status().isOk());
@@ -161,6 +168,7 @@ public class KeywordResourceTest {
         assertThat(keywords).hasSize(1);
         Keyword testKeyword = keywords.iterator().next();
         assertThat(testKeyword.getLabel()).isEqualTo(UPDATED_LABEL);
+        assertThat(testKeyword.getKeyword()).isEqualTo(UPDATED_KEYWORD);
         assertThat(testKeyword.getScore()).isEqualTo(UPDATED_SCORE);
         assertThat(testKeyword.getNetwork()).isEqualTo(UPDATED_NETWORK);
         assertThat(testKeyword.getTimestamp()).isEqualTo(UPDATED_TIMESTAMP);

@@ -24,6 +24,9 @@ public class Keyword implements Serializable {
     @Field("label")
     private String label;
 
+    @Field("keyword")
+    private String keyword;
+
     @Field("score")
     private BigDecimal score;
 
@@ -52,6 +55,14 @@ public class Keyword implements Serializable {
 
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 
     public BigDecimal getScore() {
@@ -112,6 +123,7 @@ public class Keyword implements Serializable {
         return "Keyword{" +
                 "id=" + id +
                 ", label='" + label + "'" +
+                ", keyword='" + keyword + "'" +
                 ", score='" + score + "'" +
                 ", network='" + network + "'" +
                 ", timestamp='" + timestamp + "'" +

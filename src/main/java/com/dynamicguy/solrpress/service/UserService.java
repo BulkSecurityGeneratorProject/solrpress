@@ -1,8 +1,10 @@
 package com.dynamicguy.solrpress.service;
 
 import com.dynamicguy.solrpress.domain.Authority;
+import com.dynamicguy.solrpress.domain.PersistentToken;
 import com.dynamicguy.solrpress.domain.User;
 import com.dynamicguy.solrpress.repository.AuthorityRepository;
+import com.dynamicguy.solrpress.repository.PersistentTokenRepository;
 import com.dynamicguy.solrpress.repository.UserRepository;
 import com.dynamicguy.solrpress.security.SecurityUtils;
 import com.dynamicguy.solrpress.service.util.RandomUtil;
@@ -33,6 +35,9 @@ public class UserService {
 
     @Inject
     private UserRepository userRepository;
+
+    @Inject
+    private PersistentTokenRepository persistentTokenRepository;
 
     @Inject
     private AuthorityRepository authorityRepository;
@@ -91,7 +96,7 @@ public class UserService {
             u.setPassword(encryptedPassword);
             userRepository.save(u);
             log.debug("Changed password for User: {}", u);
-        } );
+        });
     }
 
     public User getUserWithAuthorities() {
@@ -100,6 +105,22 @@ public class UserService {
         return currentUser;
     }
 
+    /**
+     * Persistent Token are used for providing automatic authentication, they should be automatically deleted after
+     * 30 days.
+     * <p/>
+     * <p>
+     * This is scheduled to get fired everyday, at midnight.
+     * </p>
+     */
+    @Scheduled(cron = "0 0 0 * * ?")
+    public void removeOldPersistentTokens() {
+        LocalDate now = new LocalDate();
+        persistentTokenRepository.findByTokenDateBefore(now.minusMonths(1)).stream().forEach(token ->{
+            log.debug("Deleting token {}", token.getSeries());
+            persistentTokenRepository.delete(token);
+        });
+    }
 
     /**
      * Not activated users should be automatically deleted after 3 days.

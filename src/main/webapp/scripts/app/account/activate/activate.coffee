@@ -3,7 +3,9 @@ angular.module('solrpressApp').config ($stateProvider) ->
   $stateProvider.state 'activate',
     parent: 'account'
     url: '/activate?key'
-    data: roles: []
+    data:
+      roles: []
+      pageTitle: 'activate.title'
     views: 'content@':
       templateUrl: 'scripts/app/account/activate/activate.html'
       controller: 'ActivationController'

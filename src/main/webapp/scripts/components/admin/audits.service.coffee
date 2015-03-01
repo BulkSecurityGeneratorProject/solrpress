@@ -5,8 +5,6 @@ angular.module('solrpressApp').factory 'AuditsService', ($http) ->
       $http.get('api/audits/all').then (response) ->
         response.data
     findByDates: (fromDate, toDate) ->
-      formatDate = undefined
-      formatDate = undefined
 
       formatDate = (dateToFormat) ->
         if dateToFormat != undefined and !angular.isString(dateToFormat)

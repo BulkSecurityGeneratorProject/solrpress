@@ -3,7 +3,6 @@ angular.module('solrpressApp').directive('activeMenu', ($translate, $locale, tmh
   {
     restrict: 'A'
     link: (scope, element, attrs) ->
-      language = undefined
       language = attrs.activeMenu
       scope.$watch (->
         $translate.use()
@@ -21,11 +20,10 @@ angular.module('solrpressApp').directive('activeMenu', ($translate, $locale, tmh
   {
     restrict: 'A'
     link: (scope, element, attrs) ->
-      clazz = undefined
-      path = undefined
       clazz = attrs.activeLink
       path = attrs.href
       path = path.substring(1)
+      #hack because path does bot return including hashbang
       scope.location = location
       scope.$watch 'location.path()', (newPath) ->
         if path == newPath

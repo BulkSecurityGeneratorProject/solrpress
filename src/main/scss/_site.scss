@@ -1,3 +1,4 @@
+
 body, html {
     font-family: ProximaNova-Regular, helvetica, tahoma, sans-serif;
     -webkit-transition: background .25s ease-out 0s;
@@ -5,42 +6,18 @@ body, html {
     -ms-transition: background .25s ease-out 0s;
     -o-transition: background .25s ease-out 0s;
     transition: background .25s ease-out 0s;
-    font-weight: 100;
     width: 100%;
     height: 100%;
-    font-size: 100%;
     color: #545759;
 }
 
 body {
     height: 100vh;
-    line-height: 1.3;
-    overflow-x: hidden;
-    padding-top: 80px;
-    padding-bottom: 20px;
-}
-
-section {
     overflow-x: hidden;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
-}
-
-input.form-control, .input-group-lg > .form-control, .input-group-lg > .input-group-addon, .input-group-lg > .input-group-btn > .btn {
-    &, &:focus, &.focus {
-        &:not(textarea):not(select) {
-            height: 46px;
-            padding: 10px 16px;
-        }
-        height: 46px;
-        font-size: 18px;
-        line-height: 1.33;
-        &:disabled {
-            border-style: dashed;
-        }
-    }
 }
 
 .development {
@@ -50,19 +27,15 @@ input.form-control, .input-group-lg > .form-control, .input-group-lg > .input-gr
     top: 0;
     left: 0;
     border: 0;
-    z-index: 20;
+    z-index: 1000;
     background: url("../images/development_ribbon.png") no-repeat center center;
-    opacity: .07;
+    opacity: 0.17;
 }
 
-.navbar {
-    z-index: 10;
-}
 
 .navbar-version {
     font-size: 10px;
-    color: #ccc;
-    vertical-align: super;
+    color: #ccc
 }
 
 .browserupgrade {
@@ -91,7 +64,7 @@ input.form-control, .input-group-lg > .form-control, .input-group-lg > .input-gr
 
 .error {
     color: white;
-    background-color: #ff0000;
+    background-color: darkred;
 }
 
 .hipster {
@@ -143,99 +116,88 @@ ul#strength {
     width: 20px;
 }
 
-.callout {
-    padding: 20px;
-    margin: 20px 0;
-    border: 1px solid #eee;
-    border-left-width: 5px;
-    border-radius: 3px
+/* end Password strength bar style */
+.navbar-inverse {
+    background-color: #3F51B5;
+    border-color: #3F51B5;
 }
-
-.callout h4 {
-    margin-top: 0;
-    margin-bottom: 5px
+.navbar-inverse .navbar-brand {
+    color: #fff;
 }
-
-.callout p:last-child {
-    margin-bottom: 0
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+    color: #fff;
+    background-color: transparent;
 }
-
-.callout code {
-    border-radius: 3px
+.navbar-inverse .navbar-text {
+    color: #fff;
 }
-
-.callout + .callout {
-    margin-top: -5px
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
 }
-
-.callout-danger {
-    border-left-color: #ce4844
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+    color: #fff;
+    background-color: transparent;
 }
-
-.callout-danger h4 {
-    color: #ce4844
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+    color: #fff;
+    background-color: #3F51B5;
 }
-
-.callout-warning {
-    border-left-color: #aa6708
+.navbar-inverse .navbar-nav > .disabled > a, .navbar-inverse .navbar-nav > .disabled > a:hover, .navbar-inverse .navbar-nav > .disabled > a:focus {
+    color: #444;
+    background-color: transparent;
 }
-
-.callout-warning h4 {
-    color: #aa6708
+.navbar-inverse .navbar-toggle {
+    border-color: #333;
 }
-
-.callout-info {
-    border-left-color: #1b809e
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+    background-color: #333;
 }
-
-.callout-info h4 {
-    color: #1b809e
+.navbar-inverse .navbar-toggle .icon-bar {
+    background-color: #fff;
 }
-
-.breadcrumb > li + li:before {
-    content: "/";
-    padding: 0px 5px;
-    margin-left: 5px;
-    color: #ccc;
-    font-size: smaller;
+.navbar-inverse .navbar-collapse,
+.navbar-inverse .navbar-form {
+    border-color: #101010;
 }
-
-.footer {
-    text-align: center;
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    background-color: #3F51B5;
+    color: #fff;
 }
-
-.modal-primary,
-.modal-info,
-.modal-success,
-.modal-warning,
-.modal-danger {
-    .modal-header {
+@media (max-width: 767px) {
+    .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
+        border-color: #3F51B5;
+    }
+    .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
+        background-color: #3F51B5;
+    }
+    .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
         color: #fff;
-        border-radius: 5px 5px 0 0;
-        padding: 14px 24px 10px;
+    }
+    .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #fff;
+        background-color: transparent;
+    }
+    .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a, .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus {
+        color: #fff;
+        background-color: #3F51B5;
+    }
+    .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a, .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:hover, .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+        color: #444;
+        background-color: transparent;
     }
 }
-
-.modal-primary .modal-header {
-    background: $brand-primary;
+.navbar-inverse .navbar-link {
+    color: #fff;
 }
-
-.modal-info .modal-header {
-    background: $brand-info;
+.navbar-inverse .navbar-link:hover {
+    color: #fff;
 }
-
-.modal-success .modal-header {
-    background: $brand-success;
+.navbar-inverse .btn-link {
+    color: #fff;
 }
-
-.modal-warning .modal-header {
-    background: $brand-warning;
+.navbar-inverse .btn-link:hover, .navbar-inverse .btn-link:focus {
+    color: #fff;
 }
-
-.modal-danger .modal-header {
-    background: $brand-danger;
-}
-
-.alert a, .alert .alert-link {
-    color: $brand-primary;
+.navbar-inverse .btn-link[disabled]:hover, .navbar-inverse .btn-link[disabled]:focus, fieldset[disabled] .navbar-inverse .btn-link:hover, fieldset[disabled] .navbar-inverse .btn-link:focus {
+    color: #444;
 }

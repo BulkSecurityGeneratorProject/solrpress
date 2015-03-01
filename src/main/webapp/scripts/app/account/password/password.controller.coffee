@@ -16,7 +16,7 @@ angular.module('solrpressApp').controller 'PasswordController', ($scope, Auth, P
         $scope.error = null
         $scope.success = 'OK'
         return
-      )['catch'] ->
+      ).catch ->
         $scope.success = null
         $scope.error = 'ERROR'
         return
